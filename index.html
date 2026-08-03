@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&amp;family=Poppins:wght@300;400;500;600;900&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/electroharmonix" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&amp;family=Zen+Kurenaido&amp;family=Kiwi+Maru:wght@300;400;500&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore beautiful landmarks of Japan and discover their rich history" />
+    <title>Discover Japan - Land of the Rising Sun</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="loading">
+    <script>
+        // Check if this is a return visit BEFORE rendering
+        if (sessionStorage.getItem('hasVisitedSite')) {
+            // Inject CSS to immediately hide loading screen
+            var style = document.createElement('style');
+            style.textContent = '#loadingScreen { display: none !important; } body { overflow: auto !important; }';
+            document.head.appendChild(style);
+            document.body.classList.remove('loading');
+        }
+    </script>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <!-- Mt. Fuji Layers -->
+        <div class="fuji-layer-1"></div>
+        <div class="fuji-layer-2"></div>
+        <div class="fuji-peak"></div>
+
+        <div class="loading-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="loader-container">
+            <img src="logo3.png" alt="Logo" class="loader-logo">
+            <h1 class="loader-text">Discover Japan</h1>
+            <p class="loader-subtitle">Land of the Rising Sun</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <header class="samurai">
+        <nav class="logoBar">
+            <a href="index.html">
+                <img src="logo3.png" class="logo" alt="Japan Travel Logo" />
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item active" aria-current="page" style="font-family: 'Poppins', sans-serif;">Home</a></li>
+                <li><a href="destinations.html" class="nav-item"
+                        style="font-family: 'Poppins', sans-serif;">Destinations</a></li>
+                <li><a href="#about" class="nav-item" id="about-link" style="font-family: 'Poppins', sans-serif;">About</a>
+                </li>
+                <li><a href="contact.html" class="nav-item" style="font-family: 'Poppins', sans-serif;">Contact</a></li>
+            </ul>
+            <button type="button" class="signup-btn" id="auth-btn" aria-controls="signup-dialog"
+                style="font-family: 'Poppins', sans-serif;">Sign up</button>
+            <button type="button" class="signout-btn" id="signout-btn" style="display: none; font-family: 'Poppins', sans-serif;">Sign
+                out</button>
+            <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-controls="mobile-nav"
+                aria-expanded="false" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+
+        <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle" />
+        <input type="checkbox" id="signup-toggle" class="signup-toggle" />
+
+        <div class="signup-overlay" id="signup-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title" inert>
+            <div class="signup-box">
+                <h2 id="auth-title">Sign Up</h2>
+                <form id="authForm" onsubmit="return handleAuth(event)">
+                    <p class="demo-notice" role="note">Demo sign-in only. Do not use a real password.</p>
+                    <input type="email" id="authEmail" placeholder="Email" required aria-label="Email" autocomplete="email" />
+                    <input type="password" id="authPassword" placeholder="Password" required aria-label="Password"
+                        minlength="8" autocomplete="new-password" />
+                    <input type="password" id="authConfirmPassword" placeholder="Confirm Password" required
+                        aria-label="Confirm Password" minlength="8" autocomplete="new-password" />
+                    <div id="authMessage" aria-live="polite"></div>
+                    <button type="submit" id="auth-submit-btn">Sign Up</button>
+                    <button type="button" id="switch-mode-btn" class="switch-mode">Already have an account? Sign
+                        In</button>
+                </form>
+                <button type="button" class="close-btn" id="auth-close" aria-label="Close sign-in dialog">Close</button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav" id="mobile-nav">
+            <ul class="mobile-nav-links">
+                <li><a href="index.html" class="mobile-nav-item active" aria-current="page">Home</a></li>
+                <li><a href="destinations.html" class="mobile-nav-item">Destinations</a></li>
+                <li><a href="#about" class="mobile-nav-item" id="mobile-about-link">About</a></li>
+                <li><a href="contact.html" class="mobile-nav-item">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="cont">
+            <div class="pekka">
+                <h2 id="h2-1" style="font-family: 'Poppins', sans-serif;">Welcome to the</h2>
+                <h1>Land<br>of the Rising Sun</h1>
+                <button type="button" class="tour-btn" id="tourBtn" onclick="openTourPanel()"
+                    style="font-family: 'Poppins', sans-serif;">Take a Tour</button>
+                <p class="explore-text" style="font-family: 'Poppins', sans-serif;">Explore various landmarks in Japan
+                </p>
+                <p class="explore-text" style="font-family: 'Poppins', sans-serif;">and uncover the history behind each
+                    place...</p>
+            </div>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="social-icons">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.689-.07-4.948 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.689-.072 4.948-.072zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X (Twitter)">
+                <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="Subscribe to our YouTube channel">
+                <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <div class="sakura" aria-hidden="true">
+        <img src="sakura.png" class="leaf leaf1" alt="" />
+        <img src="sakura.png" class="leaf leaf2" alt="" />
+        <img src="sakura.png" class="leaf leaf3" alt="" />
+        <img src="sakura.png" class="leaf leaf4" alt="" />
+        <img src="sakura.png" class="leaf leaf5" alt="" />
+        <img src="sakura.png" class="leaf leaf6" alt="" />
+        <img src="sakura.png" class="leaf leaf7" alt="" />
+        <img src="sakura.png" class="leaf leaf8" alt="" />
+        <img src="sakura.png" class="leaf leaf9" alt="" />
+        <img src="sakura.png" class="leaf leaf10" alt="" />
+        <img src="sakura.png" class="leaf leaf11" alt="" />
+        <img src="sakura.png" class="leaf leaf12" alt="" />
+        <img src="sakura.png" class="leaf leaf13" alt="" />
+        <img src="sakura.png" class="leaf leaf14" alt="" />
+        <img src="sakura.png" class="leaf leaf15" alt="" />
+        <img src="sakura.png" class="leaf leaf16" alt="" />
+        <img src="sakura.png" class="leaf leaf17" alt="" />
+        <img src="sakura.png" class="leaf leaf18" alt="" />
+    </div>
+
+    <!-- Tour Panel -->
+    <div class="tour-panel" id="tourPanel" role="dialog" aria-modal="true" aria-labelledby="tourPanelTitle"
+        tabindex="-1" inert>
+        <div class="tour-panel-header">
+            <div class="tour-panel-title">
+                <span class="tour-panel-jp">旅の始まり</span>
+                <h2 id="tourPanelTitle">Explore Japan</h2>
+            </div>
+            <button type="button" class="tour-close-btn" onclick="closeTourPanel()" aria-label="Close tour panel">×</button>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="tour-tabs" role="tablist" aria-label="Landmark categories">
+            <button type="button" class="tour-tab active" id="tour-tab-all" role="tab" aria-selected="true"
+                aria-controls="tourGrid" data-category="all" onclick="filterTour('all', this)">All</button>
+            <button type="button" class="tour-tab" id="tour-tab-temple" role="tab" aria-selected="false" tabindex="-1"
+                aria-controls="tourGrid" data-category="temple" onclick="filterTour('temple', this)">Temples &amp;
+                Shrines</button>
+            <button type="button" class="tour-tab" id="tour-tab-castle" role="tab" aria-selected="false" tabindex="-1"
+                aria-controls="tourGrid" data-category="castle" onclick="filterTour('castle', this)">Castles</button>
+            <button type="button" class="tour-tab" id="tour-tab-nature" role="tab" aria-selected="false" tabindex="-1"
+                aria-controls="tourGrid" data-category="nature" onclick="filterTour('nature', this)">Nature</button>
+            <button type="button" class="tour-tab" id="tour-tab-city" role="tab" aria-selected="false" tabindex="-1"
+                aria-controls="tourGrid" data-category="city" onclick="filterTour('city', this)">Cities</button>
+        </div>
+
+        <!-- Cards grid -->
+        <div class="tour-grid" id="tourGrid" role="tabpanel" aria-labelledby="tour-tab-all" tabindex="0">
+
+            <a href="landmark.html#kiyomizudera" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="Kiyomizudera-Temple-Kyoto.jpg" alt="Kiyomizudera Temple"
+                        loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Kiyomizu-dera</h3>
+                    <p>Kyoto</p>
+                    <div class="tour-card-stars">★★★★☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#fushimi" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="fushimi.jpg" alt="Fushimi Inari Shrine" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Shrine</div>
+                    <h3>Fushimi Inari</h3>
+                    <p>Kyoto</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#sensoji" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="sensoji.jpg" alt="Sensoji Temple" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Senso-ji</h3>
+                    <p>Tokyo</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#todaiji" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="todaiji.jpg" alt="Todai-ji Temple" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Todai-ji</h3>
+                    <p>Nara</p>
+                    <div class="tour-card-stars">★★★★☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#kofukuji" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="kofukuji.jpg" alt="Kofukuji Temple" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Kofukuji</h3>
+                    <p>Nara</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#nikko" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="nikko.jpg" alt="Nikko Toshogu Shrine" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Shrine</div>
+                    <h3>Toshogu Shrine</h3>
+                    <p>Nikko</p>
+                    <div class="tour-card-stars">★★★★☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#itsukushima" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="itsukushima.jpg" alt="Itsukushima Shrine" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Shrine</div>
+                    <h3>Itsukushima Shrine</h3>
+                    <p>Miyajima Island</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#nikkozanrinnoji" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="rinnoji2.jpg" alt="Rinno-ji Temple" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Rinno-ji</h3>
+                    <p>Nikko City</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#horyuji" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="hyoruji1.jpg" alt="Horyu-ji Temple" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Horyu-ji</h3>
+                    <p>Ikaruga Town</p>
+                    <div class="tour-card-stars">★★★★★</div>
+                </div>
+            </a>
+
+            <!-- Castles -->
+            <a href="landmark.html#kanazawa" class="tour-card" data-category="castle">
+                <div class="tour-card-img"><img src="kanazawa.jpg" alt="Kanazawa Castle" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Castle</div>
+                    <h3>Kanazawa Castle</h3>
+                    <p>Kanazawa City</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#osaka" class="tour-card" data-category="castle">
+                <div class="tour-card-img"><img src="osaka-castle-autumn.jpg" alt="Osaka Castle" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Castle</div>
+                    <h3>Osaka Castle</h3>
+                    <p>Osaka</p>
+                    <div class="tour-card-stars">★★★★★</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#nijo" class="tour-card" data-category="castle">
+                <div class="tour-card-img"><img src="nijo.jpg" alt="Nijo Castle" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Castle</div>
+                    <h3>Nijo Castle</h3>
+                    <p>Kyoto</p>
+                    <div class="tour-card-stars">★★★★☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#himeji" class="tour-card" data-category="castle">
+                <div class="tour-card-img"><img src="himeji.jpg" alt="Himeji Castle" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Castle</div>
+                    <h3>Himeji Castle</h3>
+                    <p>Himeji City</p>
+                    <div class="tour-card-stars">★★★★★</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#matsumoto" class="tour-card" data-category="castle">
+                <div class="tour-card-img"><img src="matsumoto.jpg" alt="Matsumoto Castle" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Castle</div>
+                    <h3>Matsumoto Castle</h3>
+                    <p>Matsumoto City</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#nagoyacastle" class="tour-card" data-category="castle">
+                <div class="tour-card-img"><img src="nagoya.jpg" alt="Nagoya Castle" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Castle</div>
+                    <h3>Nagoya Castle</h3>
+                    <p>Nagoya City</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#kinkakuji" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="kinkakuji.jpg" alt="Kinkaku-ji" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Kinkaku-ji</h3>
+                    <p>Kyoto</p>
+                    <div class="tour-card-stars">★★★☆☆</div>
+                </div>
+            </a>
+
+            <!-- Nature -->
+            <a href="landmark.html#mtfuji" class="tour-card" data-category="nature">
+                <div class="tour-card-img"><img src="mtfuji.jpg" alt="Mount Fuji" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Mountain</div>
+                    <h3>Mount Fuji</h3>
+                    <p>Fuji City</p>
+                    <div class="tour-card-stars">★★★★★</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#arashiyama" class="tour-card" data-category="nature">
+                <div class="tour-card-img"><img src="arashiyama.jpg" alt="Arashiyama Bamboo Grove" loading="lazy" />
+                </div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Forest</div>
+                    <h3>Arashiyama Grove</h3>
+                    <p>Kyoto</p>
+                    <div class="tour-card-stars">★★★★☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#kenrokuen" class="tour-card" data-category="nature">
+                <div class="tour-card-img"><img src="kenrokuen.jpg" alt="Kenrokuen Garden" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Garden</div>
+                    <h3>Kenrokuen Garden</h3>
+                    <p>Kanazawa City</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#kamakura" class="tour-card" data-category="temple">
+                <div class="tour-card-img"><img src="kamakura.jpg" alt="Kamakura Great Buddha" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Temple</div>
+                    <h3>Kamakura Buddha</h3>
+                    <p>Kamakura</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#koyasan" class="tour-card" data-category="nature">
+                <div class="tour-card-img"><img src="koyasan.jpg" alt="Mount Koya" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Mountain</div>
+                    <h3>Mount Koya</h3>
+                    <p>Koya Town</p>
+                    <div class="tour-card-stars">★★★★★</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#nachi" class="tour-card" data-category="nature">
+                <div class="tour-card-img"><img src="nachi.jpg" alt="Nachi Falls" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Waterfall</div>
+                    <h3>Nachi Falls</h3>
+                    <p>Nachikatsuura</p>
+                    <div class="tour-card-stars">★★★★☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#ritsurin" class="tour-card" data-category="nature">
+                <div class="tour-card-img"><img src="ritsurin.jpg" alt="Ritsurin Garden" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Garden</div>
+                    <h3>Ritsurin Garden</h3>
+                    <p>Takamatsu</p>
+                    <div class="tour-card-stars">★★★★½</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#kumanokodo" class="tour-card" data-category="nature">
+                <div class="tour-card-img"><img src="kumanokodo.jpg" alt="Kumano Kodo" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Trail</div>
+                    <h3>Kumano Kodo</h3>
+                    <p>Kii Mountains</p>
+                    <div class="tour-card-stars">★★★★★</div>
+                </div>
+            </a>
+
+            <!-- Cities -->
+            <a href="landmark.html#tokyot" class="tour-card" data-category="city">
+                <div class="tour-card-img"><img src="tokyot.jpg" alt="Tokyo Tower" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Landmark</div>
+                    <h3>Tokyo Tower</h3>
+                    <p>Tokyo</p>
+                    <div class="tour-card-stars">★★★½☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#shibuya" class="tour-card" data-category="city">
+                <div class="tour-card-img"><img src="shibuya.jpg" alt="Shibuya Crossing" loading="lazy" /></div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Urban</div>
+                    <h3>Shibuya Crossing</h3>
+                    <p>Tokyo</p>
+                    <div class="tour-card-stars">★★★½☆</div>
+                </div>
+            </a>
+
+            <a href="landmark.html#hiroshima" class="tour-card" data-category="city">
+                <div class="tour-card-img"><img src="hiroshima.jpg" alt="Hiroshima Peace Memorial" loading="lazy" />
+                </div>
+                <div class="tour-card-info">
+                    <div class="tour-card-badge">Memorial</div>
+                    <h3>Peace Memorial</h3>
+                    <p>Hiroshima</p>
+                    <div class="tour-card-stars">★★★★★</div>
+                </div>
+            </a>
+
+        </div>
+        <div class="tour-panel-footer">
+            <a href="destinations.html" class="tour-all-link">View All Destinations →</a>
+        </div>
+    </div>
+    <div class="tour-panel-backdrop" id="tourBackdrop" onclick="closeTourPanel()"></div>
+
+    <!-- Profile Card Modal -->
+    <div id="profileModal" class="modal-backdrop" style="display: none;" role="dialog" aria-modal="true"
+        aria-labelledby="profileName" inert>
+        <div class="modal-content">
+            <button type="button" class="modal-close" onclick="closeProfileModal()" aria-label="Close About dialog">&times;</button>
+            <div class="pc-card-wrapper" id="profileCardContainer">
+                <div class="pc-behind"></div>
+                <div class="pc-card-shell">
+                    <section class="pc-card">
+                        <div class="pc-inside">
+                            <div class="pc-shine"></div>
+                            <div class="pc-glare"></div>
+                            <div class="pc-content pc-avatar-content">
+                                <img class="avatar" src="DB.jpg" alt="Daniel al-Bazzal avatar" />
+                                <div class="pc-user-info">
+                                    <div class="pc-user-details">
+                                        <div class="pc-mini-avatar">
+                                            <img src="Samurailogo.jpg" alt="Daniel mini avatar" />
+                                        </div>
+                                        <div class="pc-user-text">
+                                            <div class="pc-handle">@DB</div>
+                                            <div class="pc-status">Online</div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="pc-contact-btn" onclick="toggleContactMenu(event)">Contact
+                                        Me</button>
+                                    <div id="contactMenu" class="contact-menu" style="display: none;">
+                                        <div class="contact-item">
+                                            <span class="contact-label">Email:</span>
+                                            <span class="contact-value">bazzaldaniel77@gmail.com</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <span class="contact-label">Phone:</span>
+                                            <span class="contact-value">+961 70 402 982</span>
+                                        </div>
+                                        <div class="contact-item">
+                                            <span class="contact-label">Address:</span>
+                                            <span class="contact-value">Hamra, Beirut, Lebanon</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pc-content">
+                                <div class="pc-details">
+                                    <h3 id="profileName">Daniel A. al-Bazzal</h3>
+                                    <p>Frontend Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loader logic for navigation
+        function showLoader() {
+            var loader = document.getElementById('page-loader');
+            if (loader) loader.style.display = 'block';
+        }
+        function hideLoader() {
+            var loader = document.getElementById('page-loader');
+            if (loader) loader.style.display = 'none';
+        }
+        // Show loader on navigation links
+        document.addEventListener('DOMContentLoaded', function () {
+            var navLinks = document.querySelectorAll('nav a, .menu a, .logoBar a.logo');
+            navLinks.forEach(function (link) {
+                // Only for internal links
+                if (link.getAttribute('href') && !link.getAttribute('href').startsWith('http')) {
+                    link.addEventListener('click', function (e) {
+                        // Don't show loader for About (handled by JS)
+                        if (link.id === 'about-link') return;
+                        showLoader();
+                        window.location = link.getAttribute('href');
+                        e.preventDefault();
+                    });
+                }
+            });
+            // Hide loader on page load
+            hideLoader();
+        });
+
+        const aboutBtn = document.getElementById('about-link');
+        const profileModal = document.getElementById('profileModal');
+        const profileCardContainer = document.getElementById('profileCardContainer');
+        let lastProfileTrigger = null;
+        let lastTourTrigger = null;
+        let tiltInitialized = false;
+        let activeDialog = null;
+        const dialogTriggers = new WeakMap();
+        const focusableSelector = [
+            'a[href]',
+            'button:not([disabled])',
+            'input:not([disabled]):not([type="hidden"])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
+            '[tabindex]:not([tabindex="-1"])'
+        ].join(',');
+
+        function setOutsideDialogInert(dialog, shouldBeInert, allowedElements = []) {
+            if (shouldBeInert) {
+                let current = dialog;
+                while (current && current !== document.body) {
+                    const parent = current.parentElement;
+                    Array.from(parent.children).forEach(sibling => {
+                        if (sibling === current || allowedElements.includes(sibling) || sibling.hasAttribute('inert')) return;
+                        sibling.setAttribute('inert', '');
+                        sibling.dataset.dialogInert = 'true';
+                    });
+                    current = parent;
+                }
+                return;
+            }
+
+            document.querySelectorAll('[data-dialog-inert="true"]').forEach(element => {
+                element.removeAttribute('inert');
+                delete element.dataset.dialogInert;
+            });
+        }
+
+        function openAccessibleDialog(dialog, trigger, initialFocus, allowedElements = []) {
+            if (!dialog) return;
+            dialogTriggers.set(dialog, trigger || document.activeElement);
+            dialog.removeAttribute('inert');
+            setOutsideDialogInert(dialog, true, allowedElements);
+            activeDialog = dialog;
+            requestAnimationFrame(() => (initialFocus || dialog).focus());
+        }
+
+        function closeAccessibleDialog(dialog) {
+            if (!dialog) return;
+            const trigger = dialogTriggers.get(dialog);
+            dialog.setAttribute('inert', '');
+            setOutsideDialogInert(dialog, false);
+            if (activeDialog === dialog) activeDialog = null;
+            if (trigger && document.contains(trigger)) trigger.focus();
+        }
+
+        function trapDialogFocus(event) {
+            if (event.key !== 'Tab' || !activeDialog) return;
+            const focusable = Array.from(activeDialog.querySelectorAll(focusableSelector)).filter(element =>
+                !element.closest('[inert]') && (element.offsetWidth || element.offsetHeight || element.getClientRects().length)
+            );
+            if (!focusable.length) {
+                event.preventDefault();
+                activeDialog.focus();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        }
+
+        document.addEventListener('keydown', trapDialogFocus);
+
+        aboutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            lastProfileTrigger = e.currentTarget;
+            profileModal.style.display = 'flex';
+            // Add active class to wrapper to initialize glow effect
+            profileCardContainer.classList.add('active');
+            initTiltEffect();
+            openAccessibleDialog(profileModal, lastProfileTrigger, profileModal.querySelector('.modal-close'));
+        });
+
+        function closeProfileModal() {
+            closeAccessibleDialog(profileModal);
+            profileModal.style.display = 'none';
+            // Remove active class to reset glow effect
+            profileCardContainer.classList.remove('active');
+        }
+
+        profileModal.addEventListener('click', function (e) {
+            if (e.target === profileModal) {
+                closeProfileModal();
+            }
+        });
+
+        function toggleContactMenu(event) {
+            event.stopPropagation();
+            const contactMenu = document.getElementById('contactMenu');
+            contactMenu.style.display = contactMenu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Close contact menu when clicking outside
+        document.addEventListener('click', function (e) {
+            const contactMenu = document.getElementById('contactMenu');
+            const contactBtn = document.querySelector('.pc-contact-btn');
+            if (contactMenu && !contactMenu.contains(e.target) && e.target !== contactBtn) {
+                contactMenu.style.display = 'none';
+            }
+        });
+
+        let targetX = 0, targetY = 0;
+
+        function initTiltEffect() {
+            if (tiltInitialized) return;
+            const shell = profileCardContainer.querySelector('.pc-card-shell');
+            if (!shell) return;
+
+            shell.addEventListener('pointermove', handlePointerMove);
+            shell.addEventListener('pointerenter', handlePointerEnter);
+            shell.addEventListener('pointerleave', handlePointerLeave);
+            tiltInitialized = true;
+        }
+
+        function handlePointerMove(e) {
+            const shell = e.currentTarget;
+            const contactBtn = document.querySelector('.pc-contact-btn');
+
+            // Don't tilt if hovering over contact button
+            if (contactBtn && contactBtn.contains(e.target)) {
+                return;
+            }
+
+            const rect = shell.getBoundingClientRect();
+            targetX = e.clientX - rect.left;
+            targetY = e.clientY - rect.top;
+            updateTilt();
+        }
+
+        function handlePointerEnter(e) {
+            const shell = e.currentTarget;
+            const wrapper = profileCardContainer;
+            wrapper.classList.add('active');
+            const rect = shell.getBoundingClientRect();
+            targetX = e.clientX - rect.left;
+            targetY = e.clientY - rect.top;
+        }
+
+        function handlePointerLeave(e) {
+            const shell = e.currentTarget;
+            const wrapper = profileCardContainer;
+            wrapper.classList.remove('active');
+            const width = shell.clientWidth;
+            const height = shell.clientHeight;
+            targetX = width / 2;
+            targetY = height / 2;
+        }
+
+        function updateTilt() {
+            const shell = profileCardContainer.querySelector('.pc-card-shell');
+            if (!shell) return;
+
+            const width = shell.clientWidth || 1;
+            const height = shell.clientHeight || 1;
+
+            const percentX = Math.min(Math.max((100 / width) * targetX, 0), 100);
+            const percentY = Math.min(Math.max((100 / height) * targetY, 0), 100);
+
+            const centerX = percentX - 50;
+            const centerY = percentY - 50;
+
+            const rotateX = -(centerX / 2.5);
+            const rotateY = centerY / 2;
+
+            const wrapper = profileCardContainer;
+            wrapper.style.setProperty('--pointer-x', `${percentX}%`);
+            wrapper.style.setProperty('--pointer-y', `${percentY}%`);
+            wrapper.style.setProperty('--rotate-x', `${rotateX}deg`);
+            wrapper.style.setProperty('--rotate-y', `${rotateY}deg`);
+        }
+
+        // Add scroll animation for the sakura leaves
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            window.addEventListener('scroll', function () {
+                const leaves = document.querySelectorAll('.leaf');
+                leaves.forEach(leaf => {
+                    let speed = 0.5;
+                    leaf.style.transform = `translateY(${window.scrollY * speed}px)`;
+                });
+            });
+        }
+
+        // Track authentication state
+        let isSignUpMode = true;
+
+        // This is a frontend-only demo account system. It does not provide real authentication.
+        function isSignedIn() {
+            return !!sessionStorage.getItem('signedInUser');
+        }
+
+        function createSalt() {
+            const bytes = new Uint8Array(16);
+            crypto.getRandomValues(bytes);
+            return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function hashPassword(password, salt) {
+            const data = new TextEncoder().encode(`${salt}:${password}`);
+            const digest = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Switch between Sign Up and Sign In modes
+        function switchAuthMode() {
+            isSignUpMode = !isSignUpMode;
+            const title = document.getElementById('auth-title');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const switchBtn = document.getElementById('switch-mode-btn');
+            const passwordField = document.getElementById('authPassword');
+            const confirmPasswordField = document.getElementById('authConfirmPassword');
+
+            if (isSignUpMode) {
+                title.textContent = 'Sign Up';
+                submitBtn.textContent = 'Sign Up';
+                switchBtn.textContent = 'Already have an account? Sign In';
+                passwordField.autocomplete = 'new-password';
+                confirmPasswordField.style.display = 'block';
+                confirmPasswordField.required = true;
+            } else {
+                title.textContent = 'Sign In';
+                submitBtn.textContent = 'Sign In';
+                switchBtn.textContent = 'Need an account? Sign Up';
+                passwordField.autocomplete = 'current-password';
+                confirmPasswordField.style.display = 'none';
+                confirmPasswordField.required = false;
+            }
+            // Clear any messages
+            document.getElementById('authMessage').style.display = 'none';
+        }
+
+        // Handle authentication (Sign Up or Sign In)
+        async function handleAuth(event) {
+            event.preventDefault();
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            const confirmPassword = document.getElementById('authConfirmPassword').value;
+            const messageDiv = document.getElementById('authMessage');
+
+            if (!isValidEmail(email)) {
+                showMessage('Please enter a valid email address', 'error');
+                return false;
+            }
+            if (password.length < 8) {
+                showMessage('Password must be at least 8 characters long', 'error');
+                return false;
+            }
+
+            const users = JSON.parse(localStorage.getItem('demoUsersV2') || '[]');
+            const existingUser = users.find(user => user.email === email);
+
+            if (isSignUpMode) {
+                // Sign Up Mode
+                if (password !== confirmPassword) {
+                    showMessage('Passwords do not match', 'error');
+                    return false;
+                }
+                if (existingUser) {
+                    showMessage('Email already exists. Please sign in instead.', 'error');
+                    // Auto-switch to sign in mode
+                    setTimeout(() => {
+                        switchAuthMode();
+                        document.getElementById('authEmail').value = email;
+                        document.getElementById('authPassword').value = '';
+                    }, 2000);
+                    return false;
+                }
+                const salt = createSalt();
+                const passwordHash = await hashPassword(password, salt);
+                users.push({ email, salt, passwordHash });
+                localStorage.setItem('demoUsersV2', JSON.stringify(users));
+                sessionStorage.setItem('signedInUser', email);
+                showMessage('Demo account created for this browser session.', 'success');
+            } else {
+                // Sign In Mode
+                if (!existingUser) {
+                    showMessage('Email not found. Please sign up first.', 'error');
+                    // Auto-switch to sign up mode
+                    setTimeout(() => {
+                        switchAuthMode();
+                        document.getElementById('authEmail').value = email;
+                        document.getElementById('authPassword').value = '';
+                    }, 2000);
+                    return false;
+                }
+                const passwordHash = await hashPassword(password, existingUser.salt);
+                if (existingUser.passwordHash !== passwordHash) {
+                    showMessage('Incorrect password. Please try again.', 'error');
+                    return false;
+                }
+                sessionStorage.setItem('signedInUser', email);
+                showMessage('Signed in to the frontend demo.', 'success');
+            }
+
+            document.getElementById('authForm').reset();
+            setTimeout(() => {
+                document.getElementById('signup-toggle').checked = false;
+                closeAccessibleDialog(document.querySelector('.signup-overlay'));
+                messageDiv.style.display = 'none';
+                updateAuthUI();
+            }, 1500);
+            return false;
+        }
+
+        // Sign out function
+        function handleSignOut() {
+            sessionStorage.removeItem('signedInUser');
+
+            // Reset the signup modal state
+            document.getElementById('signup-toggle').checked = false;
+
+            // Reset form to Sign Up mode
+            isSignUpMode = true;
+            const title = document.getElementById('auth-title');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const switchBtn = document.getElementById('switch-mode-btn');
+            const passwordField = document.getElementById('authPassword');
+            const confirmPasswordField = document.getElementById('authConfirmPassword');
+
+            title.textContent = 'Sign Up';
+            submitBtn.textContent = 'Sign Up';
+            switchBtn.textContent = 'Already have an account? Sign In';
+            passwordField.autocomplete = 'new-password';
+            confirmPasswordField.style.display = 'block';
+            confirmPasswordField.required = true;
+
+            // Clear form and messages
+            document.getElementById('authForm').reset();
+            document.getElementById('authMessage').style.display = 'none';
+
+            updateAuthUI();
+            showNotification('Successfully signed out!', 'success');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+
+            let backgroundColor;
+            switch (type) {
+                case 'warning':
+                    backgroundColor = 'rgba(255, 165, 0, 0.9)';
+                    break;
+                case 'error':
+                    backgroundColor = 'rgba(220, 20, 60, 0.9)';
+                    break;
+                case 'success':
+                default:
+                    backgroundColor = 'rgba(0, 128, 0, 0.9)';
+                    break;
+            }
+
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${backgroundColor};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 0.5rem;
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+                max-width: 300px;
+                word-wrap: break-word;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('authMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+
+        // Update authentication UI
+        function updateAuthUI() {
+            const authBtn = document.getElementById('auth-btn');
+            const signoutBtn = document.getElementById('signout-btn');
+            const signedInUser = sessionStorage.getItem('signedInUser');
+
+            if (signedInUser) {
+                authBtn.style.display = 'none';
+                signoutBtn.style.display = 'inline-block';
+                signoutBtn.textContent = `Sign out (${signedInUser.split('@')[0]})`;
+            } else {
+                // Ensure signup modal is closed and reset
+                document.getElementById('signup-toggle').checked = false;
+                document.querySelector('.signup-overlay').setAttribute('inert', '');
+
+                authBtn.style.display = 'inline-block';
+                authBtn.textContent = 'Sign up';
+                authBtn.classList.remove('signed-up');
+                authBtn.setAttribute('tabindex', '0');
+                authBtn.setAttribute('aria-disabled', 'false');
+                authBtn.style.pointerEvents = '';
+                signoutBtn.style.display = 'none';
+            }
+        }
+
+        // Prevent booking unless signed in
+        document.addEventListener('DOMContentLoaded', function () {
+            updateAuthUI();
+
+            const signupToggle = document.getElementById('signup-toggle');
+            const signupOverlay = document.querySelector('.signup-overlay');
+            const authBtn = document.getElementById('auth-btn');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuButton = document.getElementById('mobile-menu-btn');
+
+            authBtn.addEventListener('click', function () {
+                signupToggle.checked = true;
+                openAccessibleDialog(signupOverlay, authBtn, document.getElementById('authEmail'));
+            });
+            document.getElementById('auth-close').addEventListener('click', function () {
+                signupToggle.checked = false;
+                closeAccessibleDialog(signupOverlay);
+            });
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenuToggle.checked = !mobileMenuToggle.checked;
+                mobileMenuButton.setAttribute('aria-expanded', String(mobileMenuToggle.checked));
+                if (mobileMenuToggle.checked) {
+                    setTimeout(() => document.querySelector('.mobile-nav-item').focus(), 0);
+                }
+            });
+
+            signupToggle.addEventListener('change', function () {
+                if (signupToggle.checked) {
+                    openAccessibleDialog(signupOverlay, document.activeElement, document.getElementById('authEmail'));
+                } else {
+                    closeAccessibleDialog(signupOverlay);
+                }
+            });
+
+            // Add event listeners
+            document.getElementById('switch-mode-btn').addEventListener('click', switchAuthMode);
+            document.getElementById('signout-btn').addEventListener('click', handleSignOut);
+
+            // Mobile about link functionality
+            document.getElementById('mobile-about-link').addEventListener('click', function (e) {
+                e.preventDefault();
+                document.getElementById('mobile-menu-toggle').checked = false;
+                document.getElementById('mobile-menu-btn').setAttribute('aria-expanded', 'false');
+                document.getElementById('about-link').click();
+            });
+
+            if (window.location.hash === '#about') {
+                setTimeout(() => document.getElementById('about-link').click(), 0);
+            }
+
+            const tourBtnEl = document.getElementById('tourBtn');
+            if (tourBtnEl) {
+                tourBtnEl.addEventListener('click', function (e) {
+                    if (!isSignedIn()) {
+                        e.stopImmediatePropagation();
+                        showNotification('Please sign up or sign in to take a tour!', 'warning');
+                        document.getElementById('signup-toggle').checked = true;
+                        openAccessibleDialog(document.querySelector('.signup-overlay'), tourBtnEl,
+                            document.getElementById('authEmail'));
+                    }
+                }, true);
+            }
+        });
+
+        function openTourPanel() {
+            const panel = document.getElementById('tourPanel');
+            const backdrop = document.getElementById('tourBackdrop');
+            if (!panel) return;
+            lastTourTrigger = document.activeElement;
+            panel.classList.add('open');
+            backdrop.classList.add('open');
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
+            openAccessibleDialog(panel, lastTourTrigger, panel.querySelector('.tour-close-btn'), [backdrop]);
+        }
+
+        function closeTourPanel() {
+            const panel = document.getElementById('tourPanel');
+            const backdrop = document.getElementById('tourBackdrop');
+            if (!panel) return;
+            panel.classList.remove('open');
+            backdrop.classList.remove('open');
+            closeAccessibleDialog(panel);
+            document.documentElement.style.overflow = '';
+            document.body.style.overflow = '';
+        }
+
+        function filterTour(category, tabEl) {
+            // Update active tab
+            document.querySelectorAll('.tour-tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.tabIndex = -1;
+            });
+            tabEl.classList.add('active');
+            tabEl.setAttribute('aria-selected', 'true');
+            tabEl.tabIndex = 0;
+            document.getElementById('tourGrid').setAttribute('aria-labelledby', tabEl.id);
+
+            // Show/hide cards
+            document.querySelectorAll('.tour-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = '';
+                    card.classList.add('visible');
+                } else {
+                    card.style.display = 'none';
+                    card.classList.remove('visible');
+                }
+            });
+        }
+
+        document.querySelector('.tour-tabs').addEventListener('keydown', function (event) {
+            if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+            const tabs = Array.from(this.querySelectorAll('[role="tab"]'));
+            const currentIndex = tabs.indexOf(document.activeElement);
+            let nextIndex = currentIndex;
+            if (event.key === 'Home') nextIndex = 0;
+            if (event.key === 'End') nextIndex = tabs.length - 1;
+            if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+            if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+            event.preventDefault();
+            tabs[nextIndex].click();
+            tabs[nextIndex].focus();
+        });
+
+        // Close active dialogs on Escape.
+        document.addEventListener('keydown', function (e) {
+            if (e.key !== 'Escape') return;
+            if (profileModal.style.display === 'flex') return closeProfileModal();
+            if (document.getElementById('tourPanel').classList.contains('open')) return closeTourPanel();
+            const signupOverlay = document.querySelector('.signup-overlay');
+            if (document.getElementById('signup-toggle').checked) {
+                document.getElementById('signup-toggle').checked = false;
+                return closeAccessibleDialog(signupOverlay);
+            }
+            document.getElementById('mobile-menu-toggle').checked = false;
+            document.getElementById('mobile-menu-btn').setAttribute('aria-expanded', 'false');
+        });
+    </script>
+
+    <!-- Loading Screen Script -->
+    <script>
+        // Loading screen functionality
+        window.addEventListener('load', function () {
+            // Minimum loading time to show the animation
+            const minLoadTime = 4500; // 4.5 seconds
+            const startTime = performance.now();
+
+            function hideLoadingScreen() {
+                const elapsed = performance.now() - startTime;
+                const remainingTime = Math.max(0, minLoadTime - elapsed);
+
+                setTimeout(() => {
+                    const loadingScreen = document.getElementById('loadingScreen');
+                    const body = document.body;
+
+                    // Add hide class to trigger fade out
+                    loadingScreen.classList.add('hide');
+
+                    // Remove loading class from body to show main content
+                    setTimeout(() => {
+                        body.classList.remove('loading');
+                    }, 400); // Small delay for smooth transition
+
+                    // Remove loading screen from DOM after animation completes
+                    setTimeout(() => {
+                        loadingScreen.remove();
+                    }, 800);
+                }, remainingTime);
+            }
+
+            // Only show loading screen on first visit
+            if (!sessionStorage.getItem('hasVisitedSite')) {
+                sessionStorage.setItem('hasVisitedSite', 'true');
+                hideLoadingScreen();
+            } else {
+                // If returning to home, remove loading screen element
+                const loadingScreen = document.getElementById('loadingScreen');
+                if (loadingScreen) loadingScreen.remove();
+            }
+        });
+
+        // Fallback: Hide loading screen after maximum time
+        setTimeout(() => {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen && !loadingScreen.classList.contains('hide')) {
+                loadingScreen.classList.add('hide');
+                document.body.classList.remove('loading');
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 800);
+            }
+        }, 8000); // 8 second fallback
+    </script>
+
+    <div class="progress" id="page-loader"
+        style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:99999;"></div>
+</body>
+
+</html>

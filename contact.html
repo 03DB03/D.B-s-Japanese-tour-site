@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Discover Japan</title>
+    <meta name="description" content="Contact Discover Japan for travel information and project inquiries." />
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&amp;family=Poppins:wght@300;400;500;600;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/electroharmonix" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #B22234;
+            --accent: #3C3B6E;
+            --sakura: #FFB7C5;
+            --text-light: #ffffff;
+            --text-dark: #000000;
+            --bg-deep: #0a0a14;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--bg-deep);
+        }
+
+        .contact-container {
+            min-height: calc(100vh - 104px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 60px 20px;
+        }
+
+        .contact-video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: saturate(1.05) contrast(1.02);
+        }
+
+        .contact-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 40%, rgba(10, 10, 20, 0.25) 0%, rgba(10, 10, 20, 0.65) 100%),
+                linear-gradient(180deg, rgba(10, 10, 20, 0.45) 0%, rgba(10, 10, 20, 0.25) 35%, rgba(10, 10, 20, 0.65) 100%);
+            z-index: -1;
+        }
+
+        /* ---------- Layout shell ---------- */
+        .contact-shell {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 880px;
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 0;
+        }
+
+        /* Vertical Japanese rail */
+        .vertical-rail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 30px 0;
+        }
+
+        .vertical-rail .rune-line {
+            writing-mode: vertical-rl;
+            font-family: "Sawarabi Mincho", serif;
+            font-weight: 500;
+            font-size: 1.25rem;
+            letter-spacing: 0.45em;
+            color: var(--sakura);
+            text-shadow:
+                0 0 5px var(--sakura),
+                0 0 12px rgba(255, 183, 197, 0.6);
+        }
+
+        .vertical-rail .rail-line {
+            width: 1px;
+            flex: 1;
+            background: linear-gradient(to bottom, transparent, rgba(255,183,197,0.6), transparent);
+            min-height: 40px;
+        }
+
+        /* ---------- Card ---------- */
+        .contact-card {
+            background: linear-gradient(155deg, rgba(20, 20, 38, 0.82), rgba(12, 12, 26, 0.88));
+            border-radius: 4px;
+            box-shadow:
+                0 30px 60px -20px rgba(0, 0, 0, 0.65),
+                0 0 0 1px rgba(255, 183, 197, 0.25),
+                0 0 30px rgba(255, 183, 197, 0.08);
+            padding: 48px 50px 42px;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            border: 1px solid rgba(255, 183, 197, 0.22);
+            pointer-events: none;
+        }
+
+        /* Seal / hanko signature element */
+        .hanko {
+            position: absolute;
+            top: -26px;
+            right: 38px;
+            width: 78px;
+            height: 78px;
+            border-radius: 6px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-6deg);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.45), 0 0 16px rgba(255,183,197,0.25), 0 0 0 1px rgba(255,255,255,0.08) inset;
+        }
+
+        .hanko span {
+            font-family: "Sawarabi Mincho", serif;
+            font-weight: 500;
+            color: #ffffff;
+            font-size: 1.7rem;
+            line-height: 1;
+            writing-mode: vertical-rl;
+            letter-spacing: 2px;
+        }
+
+        .eyebrow {
+            font-family: "Archivo Black", sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--sakura);
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .contact-header h1 {
+            font-family: "Electroharmonix", "Sawarabi Mincho", serif;
+            font-size: 2.7rem;
+            font-weight: 500;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            text-shadow:
+                0 0 5px var(--sakura),
+                0 0 14px rgba(255, 183, 197, 0.55);
+        }
+
+        .contact-header .jp-sub {
+            font-family: "Sawarabi Mincho", serif;
+            font-size: 1.05rem;
+            color: var(--sakura);
+            font-weight: 500;
+            margin-bottom: 22px;
+            letter-spacing: 0.05em;
+        }
+
+        .gold-divider {
+            height: 1px;
+            width: 100%;
+            background: linear-gradient(to right, var(--sakura), rgba(255,183,197,0));
+            margin-bottom: 26px;
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px 30px;
+            margin-bottom: 28px;
+        }
+
+        .info-block {
+            border-left: 2px solid rgba(178, 34, 52, 0.55);
+            padding-left: 14px;
+        }
+
+        .info-block.full {
+            grid-column: 1 / -1;
+        }
+
+        .info-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(255, 183, 197, 0.75);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .info-value, .info-value p {
+            color: var(--text-light);
+            font-size: 0.96rem;
+            line-height: 1.55;
+        }
+
+        .info-value a {
+            color: var(--sakura);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(255, 183, 197, 0.35);
+            transition: border-color 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+        }
+
+        .info-value a:hover {
+            border-color: var(--sakura);
+            text-shadow: 0 0 8px rgba(255, 183, 197, 0.6);
+        }
+
+        .social-row {
+            display: flex;
+            gap: 16px;
+        }
+
+        .blurb {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.72);
+            margin-top: 4px;
+            margin-bottom: 30px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            letter-spacing: 0.02em;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--text-light);
+            box-shadow: 0 8px 20px rgba(178, 34, 52, 0.4);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(60, 59, 110, 0.5), 0 0 10px 2px var(--sakura);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid rgba(255, 183, 197, 0.45);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--sakura);
+            box-shadow: 0 0 10px 2px rgba(255, 183, 197, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive design for all devices */
+        @media (max-width: 479px) {
+            .contact-container {
+                padding: 40px 15px;
+                min-height: auto;
+            }
+
+            .contact-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .vertical-rail {
+                display: none;
+            }
+
+            .contact-card {
+                padding: 28px 18px 22px;
+                border-radius: 8px;
+            }
+
+            .hanko {
+                top: -15px;
+                right: 12px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .hanko span {
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+            }
+
+            .eyebrow {
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+                margin-bottom: 8px;
+            }
+
+            .contact-header h1 {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+                margin-bottom: 6px;
+            }
+
+            .contact-header .jp-sub {
+                font-size: 0.9rem;
+                margin-bottom: 16px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 16px 0;
+                margin-bottom: 20px;
+            }
+
+            .info-label {
+                font-size: 0.6rem;
+                letter-spacing: 0.12em;
+                margin-bottom: 4px;
+            }
+
+            .info-value, .info-value p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .blurb {
+                font-size: 0.8rem;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            .actions {
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 480px) and (max-width: 700px) {
+            .contact-container {
+                padding: 50px 20px;
+            }
+
+            .contact-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .vertical-rail {
+                display: none;
+            }
+
+            .contact-card {
+                padding: 32px 24px 28px;
+                border-radius: 10px;
+            }
+
+            .hanko {
+                top: -18px;
+                right: 18px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .hanko span {
+                font-size: 1.2rem;
+                letter-spacing: 1.5px;
+            }
+
+            .eyebrow {
+                font-size: 0.65rem;
+                margin-bottom: 9px;
+            }
+
+            .contact-header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 1.5px;
+                margin-bottom: 7px;
+            }
+
+            .contact-header .jp-sub {
+                font-size: 0.95rem;
+                margin-bottom: 18px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 18px 0;
+                margin-bottom: 22px;
+            }
+
+            .info-label {
+                font-size: 0.65rem;
+                letter-spacing: 0.15em;
+                margin-bottom: 4px;
+            }
+
+            .info-value, .info-value p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            .blurb {
+                font-size: 0.83rem;
+                line-height: 1.55;
+                margin-bottom: 22px;
+            }
+
+            .actions {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                padding: 11px 22px;
+                font-size: 0.88rem;
+            }
+        }
+
+        @media (min-width: 701px) and (max-width: 1023px) {
+            .contact-container {
+                padding: 60px 30px;
+            }
+
+            .contact-shell {
+                grid-template-columns: 60px 1fr;
+            }
+
+            .vertical-rail {
+                display: flex;
+                padding: 20px 0;
+            }
+
+            .contact-card {
+                padding: 42px 38px 36px;
+                border-radius: 12px;
+            }
+
+            .hanko {
+                top: -22px;
+                right: 30px;
+                width: 65px;
+                height: 65px;
+            }
+
+            .hanko span {
+                font-size: 1.5rem;
+                letter-spacing: 2px;
+            }
+
+            .eyebrow {
+                font-size: 0.68rem;
+                margin-bottom: 10px;
+            }
+
+            .contact-header h1 {
+                font-size: 2.2rem;
+                letter-spacing: 1.5px;
+                margin-bottom: 8px;
+            }
+
+            .contact-header .jp-sub {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px 25px;
+                margin-bottom: 26px;
+            }
+
+            .info-value, .info-value p {
+                font-size: 0.93rem;
+                line-height: 1.5;
+            }
+
+            .blurb {
+                font-size: 0.85rem;
+                margin-bottom: 25px;
+            }
+
+            .btn {
+                padding: 12px 26px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .contact-container {
+                padding: 60px 20px;
+            }
+
+            .contact-shell {
+                grid-template-columns: 64px 1fr;
+            }
+
+            .vertical-rail {
+                display: flex;
+                padding: 30px 0;
+            }
+
+            .contact-card {
+                padding: 48px 50px 42px;
+            }
+
+            .hanko {
+                top: -26px;
+                right: 38px;
+                width: 78px;
+                height: 78px;
+            }
+
+            .hanko span {
+                font-size: 1.7rem;
+                letter-spacing: 2px;
+            }
+
+            .eyebrow {
+                font-size: 0.7rem;
+                margin-bottom: 10px;
+            }
+
+            .contact-header h1 {
+                font-size: 2.7rem;
+                letter-spacing: 2px;
+                margin-bottom: 8px;
+            }
+
+            .contact-header .jp-sub {
+                font-size: 1.05rem;
+                margin-bottom: 22px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 22px 30px;
+                margin-bottom: 28px;
+            }
+
+            .info-value, .info-value p {
+                font-size: 0.96rem;
+                line-height: 1.55;
+            }
+
+            .blurb {
+                font-size: 0.88rem;
+                margin-bottom: 30px;
+            }
+
+            .btn {
+                padding: 13px 30px;
+                font-size: 0.92rem;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .btn,
+            a {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        /* Improve text scaling on small screens */
+        @media (max-width: 480px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            html {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="page-loader" style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:99999;"></div>
+
+    <header class="contact-site-header">
+        <nav class="logoBar" aria-label="Primary navigation">
+            <a href="index.html" aria-label="Discover Japan home">
+                <img src="logo3.png" class="logo" alt="Japan Travel Logo" />
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+                <li><a href="destinations.html" class="nav-item">Destinations</a></li>
+                <li><a href="index.html#about" class="nav-item">About</a></li>
+                <li><a href="contact.html" class="nav-item active" aria-current="page">Contact</a></li>
+            </ul>
+            <button type="button" class="signup-btn" id="auth-btn" aria-controls="signup-dialog">Sign up</button>
+            <button type="button" class="signout-btn" id="signout-btn" style="display:none;">Sign out</button>
+            <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-controls="mobile-nav"
+                aria-expanded="false" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle" />
+    <input type="checkbox" id="signup-toggle" class="signup-toggle" />
+
+    <div class="signup-overlay" id="signup-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title" inert>
+        <div class="signup-box">
+            <h2 id="auth-title">Sign Up</h2>
+            <form id="authForm" onsubmit="return handleAuth(event)">
+                <p class="demo-notice" role="note">Demo sign-in only. Do not use a real password.</p>
+                <input type="email" id="authEmail" placeholder="Email" required aria-label="Email" autocomplete="email" />
+                <input type="password" id="authPassword" placeholder="Password" required aria-label="Password" minlength="8" autocomplete="new-password" />
+                <input type="password" id="authConfirmPassword" placeholder="Confirm Password" required aria-label="Confirm Password" minlength="8" autocomplete="new-password" />
+                <div id="authMessage" aria-live="polite"></div>
+                <button type="submit" id="auth-submit-btn">Sign Up</button>
+                <button type="button" id="switch-mode-btn" class="switch-mode">Already have an account? Sign In</button>
+            </form>
+            <button type="button" class="close-btn" id="auth-close" aria-label="Close sign-in dialog">Close</button>
+        </div>
+    </div>
+
+    <div class="mobile-nav" id="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-nav-item">Home</a></li>
+            <li><a href="destinations.html" class="mobile-nav-item">Destinations</a></li>
+            <li><a href="index.html#about" class="mobile-nav-item">About</a></li>
+            <li><a href="contact.html" class="mobile-nav-item active" aria-current="page">Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="contact-container">
+        <video autoplay loop muted playsinline class="contact-video-bg">
+            <source src="Chinese Dragon.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="contact-overlay"></div>
+
+        <div class="contact-shell">
+            <div class="vertical-rail">
+                <div class="rail-line"></div>
+                <div class="rune-line">お問い合わせ</div>
+                <div class="rail-line"></div>
+            </div>
+
+            <div class="contact-card">
+                <div class="hanko"><span>日本</span></div>
+
+                <div class="contact-header">
+                    <div class="eyebrow">Discover Japan &mdash; Travel Co.</div>
+                    <h1>Get in Touch</h1>
+                    <div class="jp-sub">私たちはあなたの旅をお手伝いします</div>
+                </div>
+
+                <div class="gold-divider"></div>
+
+                <div class="info-grid">
+                    <div class="info-block">
+                        <div class="info-label">Email</div>
+                        <div class="info-value"><a href="mailto:info@discoverjapan.com">info@discoverjapan.com</a></div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-label">Support Hours</div>
+                        <div class="info-value">Mon&ndash;Fri, 9:00&ndash;18:00 JST</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-label">Phone (Japan)</div>
+                        <div class="info-value"><a href="tel:+81123456789">+81 12-3456-789</a></div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-label">Phone (International)</div>
+                        <div class="info-value"><a href="tel:+81312345678">+81 3-1234-5678</a></div>
+                    </div>
+
+                    <div class="info-block full">
+                        <div class="info-label">Head Office</div>
+                        <div class="info-value">
+                            Discover Japan Travel Co.<br>
+                            1-2-3 Sakura St, Chiyoda-ku, Tokyo 100-0001, Japan
+                        </div>
+                    </div>
+
+                    <div class="info-block full">
+                        <div class="info-label">Social</div>
+                        <div class="info-value social-row">
+                            <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+                            <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a>
+                            <a href="https://youtube.com" target="_blank" rel="noopener">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="blurb">For urgent matters, please call our support line directly. For general questions, feedback, or partnership opportunities, send us a message below &mdash; we aim to respond within one business day.</p>
+
+                <div class="actions">
+                    <a href="mailto:info@discoverjapan.com?subject=Inquiry%20from%20Website" class="btn btn-primary">Send a Message</a>
+                    <a href="index.html" class="btn btn-ghost">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isSignUpMode = true;
+        let activeDialog = null;
+        const dialogTriggers = new WeakMap();
+        const focusableSelector = [
+            'a[href]',
+            'button:not([disabled])',
+            'input:not([disabled]):not([type="hidden"])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
+            '[tabindex]:not([tabindex="-1"])'
+        ].join(',');
+
+        function setOutsideDialogInert(dialog, shouldBeInert) {
+            if (shouldBeInert) {
+                let current = dialog;
+                while (current && current !== document.body) {
+                    const parent = current.parentElement;
+                    Array.from(parent.children).forEach(sibling => {
+                        if (sibling === current || sibling.hasAttribute('inert')) return;
+                        sibling.setAttribute('inert', '');
+                        sibling.dataset.dialogInert = 'true';
+                    });
+                    current = parent;
+                }
+                return;
+            }
+
+            document.querySelectorAll('[data-dialog-inert="true"]').forEach(element => {
+                element.removeAttribute('inert');
+                delete element.dataset.dialogInert;
+            });
+        }
+
+        function openAccessibleDialog(dialog, trigger, initialFocus) {
+            dialogTriggers.set(dialog, trigger || document.activeElement);
+            dialog.removeAttribute('inert');
+            setOutsideDialogInert(dialog, true);
+            activeDialog = dialog;
+            requestAnimationFrame(() => initialFocus.focus());
+        }
+
+        function closeAccessibleDialog(dialog) {
+            const trigger = dialogTriggers.get(dialog);
+            dialog.setAttribute('inert', '');
+            setOutsideDialogInert(dialog, false);
+            if (activeDialog === dialog) activeDialog = null;
+            if (trigger && document.contains(trigger)) trigger.focus();
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key !== 'Tab' || !activeDialog) return;
+            const focusable = Array.from(activeDialog.querySelectorAll(focusableSelector)).filter(element =>
+                !element.closest('[inert]') && (element.offsetWidth || element.offsetHeight || element.getClientRects().length)
+            );
+            if (!focusable.length) return;
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        });
+
+        function showLoader() {
+            const loader = document.getElementById('page-loader');
+            if (loader) loader.style.display = 'block';
+        }
+
+        function hideLoader() {
+            const loader = document.getElementById('page-loader');
+            if (loader) loader.style.display = 'none';
+        }
+
+        function createSalt() {
+            const bytes = new Uint8Array(16);
+            crypto.getRandomValues(bytes);
+            return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function hashPassword(password, salt) {
+            const data = new TextEncoder().encode(`${salt}:${password}`);
+            const digest = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('authMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+
+        function switchAuthMode() {
+            isSignUpMode = !isSignUpMode;
+            const passwordField = document.getElementById('authPassword');
+            const confirmPassword = document.getElementById('authConfirmPassword');
+            document.getElementById('auth-title').textContent = isSignUpMode ? 'Sign Up' : 'Sign In';
+            document.getElementById('auth-submit-btn').textContent = isSignUpMode ? 'Sign Up' : 'Sign In';
+            document.getElementById('switch-mode-btn').textContent = isSignUpMode
+                ? 'Already have an account? Sign In'
+                : 'Need an account? Sign Up';
+            confirmPassword.style.display = isSignUpMode ? 'block' : 'none';
+            confirmPassword.required = isSignUpMode;
+            passwordField.autocomplete = isSignUpMode ? 'new-password' : 'current-password';
+            document.getElementById('authMessage').style.display = 'none';
+        }
+
+        function resetAuthDialog() {
+            isSignUpMode = true;
+            const passwordField = document.getElementById('authPassword');
+            const confirmPassword = document.getElementById('authConfirmPassword');
+            const messageDiv = document.getElementById('authMessage');
+            document.getElementById('auth-title').textContent = 'Sign Up';
+            document.getElementById('auth-submit-btn').textContent = 'Sign Up';
+            document.getElementById('switch-mode-btn').textContent = 'Already have an account? Sign In';
+            confirmPassword.style.display = 'block';
+            confirmPassword.required = true;
+            passwordField.autocomplete = 'new-password';
+            document.getElementById('authForm').reset();
+            messageDiv.textContent = '';
+            messageDiv.className = '';
+            messageDiv.style.display = 'none';
+        }
+
+        async function handleAuth(event) {
+            event.preventDefault();
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            const confirmPassword = document.getElementById('authConfirmPassword').value;
+
+            if (!isValidEmail(email)) {
+                showMessage('Please enter a valid email address.', 'error');
+                return false;
+            }
+            if (password.length < 8) {
+                showMessage('Password must be at least 8 characters long.', 'error');
+                return false;
+            }
+
+            const users = JSON.parse(localStorage.getItem('demoUsersV2') || '[]');
+            const existingUser = users.find(user => user.email === email);
+
+            if (isSignUpMode) {
+                if (password !== confirmPassword) {
+                    showMessage('Passwords do not match.', 'error');
+                    return false;
+                }
+                if (existingUser) {
+                    showMessage('That demo account already exists. Please sign in.', 'error');
+                    return false;
+                }
+                const salt = createSalt();
+                users.push({ email, salt, passwordHash: await hashPassword(password, salt) });
+                localStorage.setItem('demoUsersV2', JSON.stringify(users));
+                showMessage('Demo account created for this browser session.', 'success');
+            } else {
+                if (!existingUser || existingUser.passwordHash !== await hashPassword(password, existingUser.salt)) {
+                    showMessage('Incorrect email or password.', 'error');
+                    return false;
+                }
+                showMessage('Signed in to the frontend demo.', 'success');
+            }
+
+            sessionStorage.setItem('signedInUser', email);
+            document.getElementById('authForm').reset();
+            setTimeout(() => {
+                document.getElementById('signup-toggle').checked = false;
+                closeAccessibleDialog(document.querySelector('.signup-overlay'));
+                resetAuthDialog();
+                updateAuthUI();
+            }, 800);
+            return false;
+        }
+
+        function handleSignOut() {
+            sessionStorage.removeItem('signedInUser');
+            document.getElementById('signup-toggle').checked = false;
+            resetAuthDialog();
+            updateAuthUI();
+        }
+
+        function updateAuthUI() {
+            const signedInUser = sessionStorage.getItem('signedInUser');
+            const authBtn = document.getElementById('auth-btn');
+            const signoutBtn = document.getElementById('signout-btn');
+            authBtn.style.display = signedInUser ? 'none' : 'inline-block';
+            signoutBtn.style.display = signedInUser ? 'inline-block' : 'none';
+            if (signedInUser) signoutBtn.textContent = `Sign out (${signedInUser.split('@')[0]})`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateAuthUI();
+            hideLoader();
+
+            const signupToggle = document.getElementById('signup-toggle');
+            const signupOverlay = document.querySelector('.signup-overlay');
+            const authBtn = document.getElementById('auth-btn');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuButton = document.getElementById('mobile-menu-btn');
+
+            authBtn.addEventListener('click', function () {
+                signupToggle.checked = true;
+                openAccessibleDialog(signupOverlay, authBtn, document.getElementById('authEmail'));
+            });
+            document.getElementById('auth-close').addEventListener('click', function () {
+                signupToggle.checked = false;
+                closeAccessibleDialog(signupOverlay);
+                resetAuthDialog();
+            });
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenuToggle.checked = !mobileMenuToggle.checked;
+                mobileMenuButton.setAttribute('aria-expanded', String(mobileMenuToggle.checked));
+                if (mobileMenuToggle.checked) {
+                    setTimeout(() => document.querySelector('.mobile-nav-item').focus(), 0);
+                }
+            });
+
+            signupToggle.addEventListener('change', function () {
+                if (signupToggle.checked) {
+                    openAccessibleDialog(signupOverlay, document.activeElement, document.getElementById('authEmail'));
+                } else {
+                    closeAccessibleDialog(signupOverlay);
+                }
+            });
+
+            document.getElementById('switch-mode-btn').addEventListener('click', switchAuthMode);
+            document.getElementById('signout-btn').addEventListener('click', handleSignOut);
+
+            document.querySelectorAll('nav a, .mobile-nav a, .actions a[href="index.html"]').forEach(function (link) {
+                link.addEventListener('click', showLoader);
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key !== 'Escape') return;
+                if (signupToggle.checked) {
+                    signupToggle.checked = false;
+                    closeAccessibleDialog(signupOverlay);
+                    resetAuthDialog();
+                    return;
+                }
+                mobileMenuToggle.checked = false;
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
+</body>
+</html>

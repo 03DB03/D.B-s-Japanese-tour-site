@@ -1,0 +1,2536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&amp;family=Poppins:wght@300;400;500;600;900&amp;display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore beautiful landmarks of Japan and discover their rich history" />
+    <title>Destinations - Discover Japan</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        body {
+            color: #f0f0f0;
+            background-image: url("Background.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: -1;
+        }
+
+        .destinations-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .destination-card {
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            padding: 20px;
+            border-left: 3px solid #FFB7C5;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(255, 183, 197, 0.2);
+        }
+
+        .destination-info {
+            flex: 1;
+        }
+
+        .destination-name {
+            font-family: 'Sawarabi Mincho', serif;
+            margin-top: 0;
+            color: #FFB7C5;
+            font-size: 28px;
+            border-bottom: 2px solid rgba(255, 183, 197, 0.35);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .destination-location {
+            color: #ccc;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .price-section,
+        .hotel-section {
+            margin-top: 15px;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #f0f0f0;
+        }
+
+        .price-tag {
+            background-color: #333;
+            color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin-right: 10px;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .hotel-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding: 5px 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .book-btn {
+            background-color: rgba(255, 183, 197, 0.15);
+            color: #FFB7C5;
+            border: 1px solid rgba(255, 183, 197, 0.4);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background-color: rgba(255, 183, 197, 0.28);
+            color: #fff;
+        }
+
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* City search input above filters */
+        .destination-search-bar {
+            margin-bottom: 1.25rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .destination-search-bar input {
+            width: 100%;
+            max-width: 420px;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(0, 0, 0, 0.18);
+            background: #ffffff;
+            color: #222222;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+        }
+
+        .destination-search-bar input::placeholder {
+            color: #999999;
+        }
+
+        .destination-search-bar input:focus {
+            border-color: #FFB7C5;
+            box-shadow: 0 0 0 2px rgba(255, 183, 197, 0.3), 0 6px 16px rgba(0, 0, 0, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .filter-btn {
+            background-color: #333;
+            color: #f0f0f0;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background-color: rgba(255, 183, 197, 0.18);
+            border: 1px solid rgba(255, 183, 197, 0.5);
+            color: #FFB7C5;
+        }
+
+        .page-title {
+            font-family: 'Sawarabi Mincho', serif;
+            text-align: center;
+            margin: 40px 0 20px;
+            color: #FFB7C5;
+        }
+
+        .sakura {
+            z-index: -1;
+        }
+
+        /* Additional dark mode styles for sidebar and navigation */
+        header {
+            background-color: #111;
+        }
+
+        .nav-item {
+            color: #f0f0f0;
+        }
+
+        .signup-btn {
+            background-color: rgba(255, 183, 197, 0.18);
+            border: 1px solid rgba(255, 183, 197, 0.4);
+            color: #FFB7C5;
+        }
+
+        .sidebar {
+            background-color: rgba(20, 20, 20, 0.8);
+        }
+
+        .signup-box {
+            background-color: #222;
+            color: #f0f0f0;
+        }
+
+        #contact-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popupIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .contact-popup-content {
+            background: #181818;
+            color: #f0f0f0;
+            border-radius: 16px;
+            padding: 32px 28px 24px 28px;
+            min-width: 320px;
+            max-width: 90vw;
+            box-shadow: 0 8px 32px #000, 0 0 0 4px rgba(255, 183, 197, 0.4);
+            position: relative;
+            text-align: left;
+            animation: popupIn 0.3s;
+        }
+
+        .contact-popup-content h3 {
+            color: #FFB7C5;
+            margin-bottom: 18px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-info-row {
+            margin-bottom: 14px;
+            font-size: 1.08rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-label {
+            color: #FFB7C5;
+            font-weight: 600;
+            min-width: 70px;
+            display: inline-block;
+        }
+
+        .contact-popup-content a {
+            color: #ffd700;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+
+        .contact-popup-close {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #FFB7C5;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 2;
+        }
+
+        .contact-popup-close:hover {
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popupIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Message styles for signup */
+        #authMessage {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        #authMessage.error {
+            background-color: rgba(255, 0, 0, 0.1);
+            color: #ff0000;
+            border: 1px solid #ff0000;
+        }
+
+        #authMessage.success {
+            background-color: rgba(0, 255, 0, 0.1);
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+
+        .switch-mode {
+            background: transparent !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            color: rgba(255, 255, 255, 0.8) !important;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem !important;
+            margin-top: 1rem !important;
+            transition: all 0.3s ease;
+        }
+
+        .switch-mode:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
+            color: rgba(255, 255, 255, 1) !important;
+        }
+
+        .signout-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(90deg, #ff4757 0%, #ff3838 100%);
+            color: #f0f0f0;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            font-weight: 500;
+            margin-left: auto;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+            min-width: 140px;
+            font-size: 0.9rem;
+        }
+
+        .signout-btn:hover {
+            background: linear-gradient(90deg, #ff3838 0%, #ff2f2f 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(255, 71, 87, 0.4);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .signup-btn.signed-up {
+            background: linear-gradient(90deg, #39ff14 0%, #00ff99 100%) !important;
+            color: #fff !important;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 8px 22px;
+            box-shadow: 0 0 12px #39ff1488;
+            border: none !important;
+            transition: background 0.2s, color 0.2s;
+            pointer-events: none;
+            opacity: 1;
+        }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1000;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            text-align: center;
+            padding: 0;
+        }
+
+        .mobile-nav-item {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .mobile-nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--sakura-pink);
+        }
+
+        .mobile-nav-item.active {
+            color: var(--sakura-pink);
+            border-bottom: 2px solid var(--sakura-pink);
+        }
+
+        /* Mobile responsive styles */
+        @media (max-width: 479px) {
+            .destinations-container {
+                max-width: 100%;
+                margin: 15px auto;
+                padding: 12px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+                margin: 20px 0 15px;
+            }
+
+            .destination-search-bar input {
+                max-width: 100%;
+                font-size: 0.9rem;
+                padding: 0.6rem 0.8rem;
+            }
+
+            .filters {
+                gap: 8px;
+                margin-bottom: 15px;
+            }
+
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .destination-card {
+                padding: 15px;
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+
+            .destination-name {
+                font-size: 1.3rem;
+                padding-bottom: 8px;
+                margin-bottom: 10px;
+            }
+
+            .destination-location {
+                font-size: 0.85rem;
+                margin-bottom: 10px;
+            }
+
+            .price-tag {
+                padding: 4px 8px;
+                font-size: 0.75rem;
+                margin-right: 6px;
+            }
+
+            .book-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+
+            .hotel-item {
+                font-size: 0.9rem;
+            }
+
+            .contact-popup-content {
+                min-width: 90vw;
+                padding: 24px 20px 18px 20px;
+                border-radius: 12px;
+            }
+
+            .contact-popup-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .contact-info-row {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (min-width: 480px) and (max-width: 767px) {
+            .destinations-container {
+                max-width: 100%;
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+                margin: 30px 0 18px;
+            }
+
+            .destination-search-bar input {
+                max-width: 100%;
+                font-size: 0.95rem;
+                padding: 0.7rem 1rem;
+            }
+
+            .filters {
+                gap: 10px;
+                margin-bottom: 18px;
+            }
+
+            .filter-btn {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+
+            .destination-card {
+                padding: 18px;
+                margin-bottom: 25px;
+                border-radius: 8px;
+            }
+
+            .destination-name {
+                font-size: 1.5rem;
+                padding-bottom: 10px;
+                margin-bottom: 12px;
+            }
+
+            .destination-location {
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+            }
+
+            .price-tag {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+                margin-right: 8px;
+            }
+
+            .book-btn {
+                padding: 7px 14px;
+                font-size: 0.85rem;
+            }
+
+            .hotel-item {
+                font-size: 0.95rem;
+            }
+
+            .contact-popup-content {
+                min-width: 85vw;
+                padding: 28px 24px 20px 24px;
+                border-radius: 14px;
+            }
+
+            .contact-popup-content h3 {
+                font-size: 1.4rem;
+            }
+
+            .contact-info-row {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .destinations-container {
+                max-width: 1000px;
+                margin: 25px auto;
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+                margin: 35px 0 20px;
+            }
+
+            .destination-search-bar input {
+                max-width: 500px;
+            }
+
+            .filters {
+                gap: 12px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .destination-card {
+                padding: 20px;
+                margin-bottom: 28px;
+                border-radius: 10px;
+            }
+
+            .destination-name {
+                font-size: 1.6rem;
+            }
+
+            .destination-location {
+                font-size: 0.95rem;
+            }
+
+            .contact-popup-content {
+                min-width: 400px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .destinations-container {
+                max-width: 1200px;
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .destination-name {
+                font-size: 1.75rem;
+            }
+        }
+
+        /* General responsive improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .filter-btn,
+            .book-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="logoBar">
+            <a href="index.html">
+                <img src="logo3.png" class="logo" alt="Japan Travel Logo" />
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-item">Home</a></li>
+                <li><a href="destinations.html" class="nav-item active" aria-current="page">Destinations</a></li>
+                <li><a href="#about" class="nav-item" id="about-link">About</a></li>
+                <li><a href="contact.html" class="nav-item">Contact</a></li>
+            </ul>
+            <button type="button" class="signup-btn" id="auth-btn" aria-controls="signup-dialog">Sign up</button>
+            <button type="button" class="signout-btn" id="signout-btn" style="display: none;">Sign out</button>
+            <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-controls="mobile-nav"
+                aria-expanded="false" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <input type="checkbox" id="mobile-menu-toggle" class="mobile-menu-toggle" />
+    <input type="checkbox" id="signup-toggle" class="signup-toggle" />
+
+        <div class="signup-overlay" id="signup-dialog" role="dialog" aria-modal="true" aria-labelledby="auth-title" inert>
+            <div class="signup-box">
+                <h2 id="auth-title">Sign Up</h2>
+                <form id="authForm" onsubmit="return handleAuth(event)">
+                    <p class="demo-notice" role="note">Demo sign-in only. Do not use a real password.</p>
+                <input type="email" id="authEmail" placeholder="Email" required aria-label="Email" autocomplete="email" />
+                <input type="password" id="authPassword" placeholder="Password" required aria-label="Password"
+                    minlength="8" autocomplete="new-password" />
+                <input type="password" id="authConfirmPassword" placeholder="Confirm Password" required
+                    aria-label="Confirm Password" minlength="8" autocomplete="new-password" />
+                <div id="authMessage" aria-live="polite"></div>
+                <button type="submit" id="auth-submit-btn">Sign Up</button>
+                <button type="button" id="switch-mode-btn" class="switch-mode">Already have an account? Sign In</button>
+            </form>
+            <button type="button" class="close-btn" id="auth-close" aria-label="Close sign-in dialog">Close</button>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobile-nav">
+        <ul class="mobile-nav-links">
+            <li><a href="index.html" class="mobile-nav-item">Home</a></li>
+            <li><a href="destinations.html" class="mobile-nav-item active" aria-current="page">Destinations</a></li>
+            <li><a href="#about" class="mobile-nav-item" id="mobile-about-link">About</a></li>
+            <li><a href="contact.html" class="mobile-nav-item">Contact</a></li>
+        </ul>
+    </div>
+
+    <input type="checkbox" id="about-toggle" class="about-toggle" />
+    <div class="about-overlay" role="dialog" aria-modal="true" aria-labelledby="destination-profile-name"
+        inert>
+        <div class="about-box" id="profile-card-container">
+            <button type="button" class="close-btn" id="about-close" aria-label="Close About dialog">&times;</button>
+            <div class="pc-card-wrapper" id="destinationProfileCard">
+                <div class="pc-behind"></div>
+                <div class="pc-card-shell">
+                    <section class="pc-card">
+                        <div class="pc-inside">
+                            <div class="pc-shine"></div>
+                            <div class="pc-glare"></div>
+                            <div class="pc-content pc-avatar-content">
+                                <img class="avatar" src="DB.jpg" alt="Daniel al-Bazzal avatar" />
+                                <div class="pc-user-info">
+                                    <div class="pc-user-details">
+                                        <div class="pc-mini-avatar">
+                                            <img src="Samurailogo.jpg" alt="Daniel mini avatar" />
+                                        </div>
+                                        <div class="pc-user-text">
+                                            <div class="pc-handle">@DB</div>
+                                            <div class="pc-status">Online</div>
+                                        </div>
+                                    </div>
+                                    <a class="pc-contact-btn" href="contact.html">Contact Me</a>
+                                </div>
+                            </div>
+                            <div class="pc-content">
+                                <div class="pc-details">
+                                    <h3 id="destination-profile-name">Daniel A. al-Bazzal</h3>
+                                    <p>Frontend Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sakura" aria-hidden="true">
+        <img src="sakura.png" class="leaf leaf1" alt="" />
+        <img src="sakura.png" class="leaf leaf2" alt="" />
+        <img src="sakura.png" class="leaf leaf3" alt="" />
+        <img src="sakura.png" class="leaf leaf4" alt="" />
+        <img src="sakura.png" class="leaf leaf5" alt="" />
+        <img src="sakura.png" class="leaf leaf6" alt="" />
+        <img src="sakura.png" class="leaf leaf7" alt="" />
+        <img src="sakura.png" class="leaf leaf8" alt="" />
+        <img src="sakura.png" class="leaf leaf9" alt="" />
+    </div>
+
+    <div class="destinations-container">
+        <h1 class="page-title">Explore Japan's Cities</h1>
+
+        <!-- City search bar -->
+        <div class="destination-search-bar">
+            <input type="text" id="city-search-input" placeholder="Search by city name (e.g. Tokyo, Kyoto, Osaka...)"
+                aria-label="Search destinations by city name" />
+        </div>
+
+        <div class="filters">
+            <button type="button" class="filter-btn active" data-region="All Cities" aria-pressed="true">All Cities</button>
+            <button type="button" class="filter-btn" data-region="Kanto Region" aria-pressed="false">Kanto Region</button>
+            <button type="button" class="filter-btn" data-region="Kansai Region" aria-pressed="false">Kansai Region</button>
+            <button type="button" class="filter-btn" data-region="Hokkaido" aria-pressed="false">Hokkaido</button>
+            <button type="button" class="filter-btn" data-region="Tohoku Region" aria-pressed="false">Tohoku Region</button>
+            <button type="button" class="filter-btn" data-region="Chubu Region" aria-pressed="false">Chubu Region</button>
+            <button type="button" class="filter-btn" data-region="Chugoku Region" aria-pressed="false">Chugoku Region</button>
+            <button type="button" class="filter-btn" data-region="Kyushu Region" aria-pressed="false">Kyushu Region</button>
+            <button type="button" class="filter-btn" data-region="Okinawa" aria-pressed="false">Okinawa</button>
+            <button type="button" class="filter-btn active" data-sort="none" aria-pressed="true">Sort: Default</button>
+            <button type="button" class="filter-btn" data-sort="asc" aria-pressed="false">Sort: Price Low-High</button>
+            <button type="button" class="filter-btn" data-sort="desc" aria-pressed="false">Sort: Price High-Low</button>
+        </div>
+
+        <!-- Destination Cards -->
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Tokyo (東京)</h2>
+                <p class="destination-location">Tokyo Prefecture, Kanto Region</p>
+                <p>Japan's bustling capital with iconic landmarks including Tokyo Tower, Shibuya Crossing, and the
+                    Imperial Palace.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Tokyo Tower: ¥1,200 (~$8)</span>
+                    <span class="price-tag">Tokyo Skytree: ¥2,100 (~$14)</span>
+                    <span class="price-tag">Tokyo DisneySea: ¥7,900 (~$53)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Park Hyatt Tokyo</span>
+                        <span>¥55,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>The Peninsula Tokyo</span>
+                        <span>¥65,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Gracery Shinjuku</span>
+                        <span>¥20,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Osaka (大阪)</h2>
+                <p class="destination-location">Osaka Prefecture, Kansai Region</p>
+                <p>Known for its modern architecture, street food, and nightlife, with attractions like Osaka Castle and
+                    Universal Studios Japan.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Osaka Castle: ¥600 (~$4)</span>
+                    <span class="price-tag">Universal Studios: ¥7,800 (~$52)</span>
+                    <span class="price-tag">Osaka Aquarium: ¥2,400 (~$16)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Conrad Osaka</span>
+                        <span>¥45,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Swissotel Nankai Osaka</span>
+                        <span>¥28,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Monterey Grasmere Osaka</span>
+                        <span>¥16,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Kyoto (京都)</h2>
+                <p class="destination-location">Kyoto Prefecture, Kansai Region</p>
+                <p>Japan's cultural capital with over 1,600 Buddhist temples, 400 Shinto shrines, and 17 UNESCO World
+                    Heritage Sites.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Kiyomizu-dera: ¥400 (~$2.70)</span>
+                    <span class="price-tag">Fushimi Inari: Free</span>
+                    <span class="price-tag">Arashiyama Bamboo Grove: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>The Ritz-Carlton Kyoto</span>
+                        <span>¥80,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hoshinoya Kyoto</span>
+                        <span>¥75,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Kanra Kyoto</span>
+                        <span>¥25,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Sapporo (札幌)</h2>
+                <p class="destination-location">Hokkaido Prefecture, Hokkaido Region</p>
+                <p>Capital of Hokkaido, famous for its snow festival, beer, and skiing resorts with beautiful natural
+                    surroundings.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Sapporo Beer Museum: Free</span>
+                    <span class="price-tag">Mt. Moiwa Ropeway: ¥1,700 (~$11)</span>
+                    <span class="price-tag">Odori Park: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Keio Plaza Hotel Sapporo</span>
+                        <span>¥15,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>JR Tower Hotel Nikko Sapporo</span>
+                        <span>¥23,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Sapporo Grand Hotel</span>
+                        <span>¥19,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Hiroshima (広島)</h2>
+                <p class="destination-location">Hiroshima Prefecture, Chugoku Region</p>
+                <p>A modern city known for its Peace Memorial Park and Museum, as well as the scenic Miyajima Island
+                    nearby.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Peace Memorial Museum: ¥200 (~$1.35)</span>
+                    <span class="price-tag">Miyajima Island Ferry: ¥180 (~$1.20)</span>
+                    <span class="price-tag">Hiroshima Castle: ¥370 (~$2.50)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Sheraton Grand Hiroshima Hotel</span>
+                        <span>¥25,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Granvia Hiroshima</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Miyajima Kinsuikan</span>
+                        <span>¥32,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Nara (奈良)</h2>
+                <p class="destination-location">Nara Prefecture, Kansai Region</p>
+                <p>Japan's first permanent capital known for its friendly deer, ancient temples, and well-preserved
+                    historic sites.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Todai-ji Temple: ¥600 (~$4)</span>
+                    <span class="price-tag">Nara Park: Free</span>
+                    <span class="price-tag">Kasuga Taisha Shrine: ¥500 (~$3.50)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Nara Hotel</span>
+                        <span>¥25,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Nikko Nara</span>
+                        <span>¥15,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Centurion Hotel Classic Nara</span>
+                        <span>¥12,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Fukuoka (福岡)</h2>
+                <p class="destination-location">Fukuoka Prefecture, Kyushu Region</p>
+                <p>Kyushu's largest city known for its delicious food, particularly ramen, shopping districts, and
+                    beaches.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Ohori Park: Free</span>
+                    <span class="price-tag">Canal City Hakata: Free</span>
+                    <span class="price-tag">Fukuoka Tower: ¥800 (~$5.40)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>JR Kyushu Hotel Blossom Fukuoka</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>The Luigans Spa &amp; Resort</span>
+                        <span>¥29,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hilton Fukuoka Sea Hawk</span>
+                        <span>¥25,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Nagoya (名古屋)</h2>
+                <p class="destination-location">Aichi Prefecture, Chubu Region</p>
+                <p>Japan's fourth-largest city, an industrial hub known for its castle, automotive industry, and local
+                    cuisine.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Nagoya Castle: ¥500 (~$3.50)</span>
+                    <span class="price-tag">Toyota Museum: ¥1,200 (~$8)</span>
+                    <span class="price-tag">Osu Shopping District: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Nagoya Marriott Associa Hotel</span>
+                        <span>¥24,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hilton Nagoya</span>
+                        <span>¥22,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Nagoya Castle</span>
+                        <span>¥15,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Yokohama (横浜)</h2>
+                <p class="destination-location">Kanagawa Prefecture, Kanto Region</p>
+                <p>Japan's second-largest city with a scenic harbor, Chinatown, and modern architecture just south of
+                    Tokyo.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Yokohama Landmark Tower: ¥1,000 (~$6.70)</span>
+                    <span class="price-tag">Cup Noodles Museum: ¥500 (~$3.50)</span>
+                    <span class="price-tag">Yokohama Chinatown: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>InterContinental Yokohama Grand</span>
+                        <span>¥28,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>The Kahala Hotel &amp; Resort Yokohama</span>
+                        <span>¥40,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel New Grand</span>
+                        <span>¥20,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Kobe (神戸)</h2>
+                <p class="destination-location">Hyogo Prefecture, Kansai Region</p>
+                <p>Port city known worldwide for its premium Kobe beef, sake breweries, and scenic mountain backdrop.
+                </p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Kobe Port Tower: ¥700 (~$4.70)</span>
+                    <span class="price-tag">Nunobiki Herb Garden: ¥1,500 (~$10)</span>
+                    <span class="price-tag">Sake Breweries Tour: ¥1,200 (~$8)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hotel La Suite Kobe Harborland</span>
+                        <span>¥35,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Oriental Hotel</span>
+                        <span>¥22,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Kobe Meriken Park Oriental Hotel</span>
+                        <span>¥20,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Kanazawa (金沢)</h2>
+                <p class="destination-location">Ishikawa Prefecture, Chubu Region</p>
+                <p>Historic city famous for its well-preserved samurai and geisha districts, beautiful gardens, and
+                    traditional crafts.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Kenroku-en Garden: ¥320 (~$2.15)</span>
+                    <span class="price-tag">21st Century Museum: ¥360 (~$2.40)</span>
+                    <span class="price-tag">Nagamachi Samurai District: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hotel Nikko Kanazawa</span>
+                        <span>¥23,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Kanazawa Tokyu Hotel</span>
+                        <span>¥19,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Mitsui Garden Hotel Kanazawa</span>
+                        <span>¥15,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Sendai (仙台)</h2>
+                <p class="destination-location">Miyagi Prefecture, Tohoku Region</p>
+                <p>Largest city in the Tohoku region known as the "City of Trees," with historical sites related to Date
+                    Masamune and beautiful coastal scenery.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Zuihoden Mausoleum: ¥570 (~$3.80)</span>
+                    <span class="price-tag">Sendai Castle Ruins: Free</span>
+                    <span class="price-tag">Matsushima Bay Cruise: ¥1,500 (~$10)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>The Westin Sendai</span>
+                        <span>¥22,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Metropolitan Sendai</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Dormy Inn Sendai Ekimae</span>
+                        <span>¥12,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Hakone (箱根)</h2>
+                <p class="destination-location">Kanagawa Prefecture, Kanto Region</p>
+                <p>Mountain resort town known for its hot springs, stunning views of Mount Fuji, and outdoor museums,
+                    just a short trip from Tokyo.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Hakone Open-Air Museum: ¥1,600 (~$10.70)</span>
+                    <span class="price-tag">Hakone Ropeway: ¥2,800 (~$18.70)</span>
+                    <span class="price-tag">Lake Ashi Cruise: ¥1,000 (~$6.70)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hakone Ginyu Ryokan</span>
+                        <span>¥70,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Green Plaza Hakone</span>
+                        <span>¥25,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hakone Yumoto Hotel</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Naha (那覇)</h2>
+                <p class="destination-location">Okinawa Prefecture, Okinawa Region</p>
+                <p>Capital of Okinawa with a unique cultural heritage, tropical climate, beautiful beaches, and World
+                    War II historical sites.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Shuri Castle: ¥400 (~$2.70)</span>
+                    <span class="price-tag">Kokusai Dori: Free</span>
+                    <span class="price-tag">Okinawa World: ¥1,650 (~$11)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hyatt Regency Naha Okinawa</span>
+                        <span>¥30,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>DoubleTree by Hilton Naha Shuri Castle</span>
+                        <span>¥22,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Mercure Okinawa Naha</span>
+                        <span>¥16,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Kamakura (鎌倉)</h2>
+                <p class="destination-location">Kanagawa Prefecture, Kanto Region</p>
+                <p>Coastal city with numerous temples, shrines, and the famous Great Buddha bronze statue, once the
+                    political center of medieval Japan.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Great Buddha (Kotoku-in): ¥300 (~$2)</span>
+                    <span class="price-tag">Hasedera Temple: ¥400 (~$2.70)</span>
+                    <span class="price-tag">Tsurugaoka Hachimangu: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Kamakura Prince Hotel</span>
+                        <span>¥24,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Kamakura Park Hotel</span>
+                        <span>¥28,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Komachien Ryokan</span>
+                        <span>¥22,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Nikko (日光)</h2>
+                <p class="destination-location">Tochigi Prefecture, Kanto Region</p>
+                <p>Mountain town home to elaborate Toshogu Shrine, beautiful national park with lakes, waterfalls, and
+                    hot springs.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Toshogu Shrine: ¥1,300 (~$8.70)</span>
+                    <span class="price-tag">Kegon Falls: ¥570 (~$3.80)</span>
+                    <span class="price-tag">Lake Chuzenji: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Nikko Kanaya Hotel</span>
+                        <span>¥32,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>The Ritz-Carlton Nikko</span>
+                        <span>¥70,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Okunoin Hotel Tokugawa</span>
+                        <span>¥25,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <!-- Additional Hokkaido cities -->
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Hakodate (函館)</h2>
+                <p class="destination-location">Hokkaido Prefecture, Hokkaido Region</p>
+                <p>Port city famous for its spectacular night views from Mt. Hakodate, historic Western-style buildings,
+                    and fresh seafood markets.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Mt. Hakodate Ropeway: ¥1,500 (~$10)</span>
+                    <span class="price-tag">Fort Goryokaku: ¥900 (~$6)</span>
+                    <span class="price-tag">Morning Market: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>La Vista Hakodate Bay</span>
+                        <span>¥28,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Four Points by Sheraton Hakodate</span>
+                        <span>¥19,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hakodate Kokusai Hotel</span>
+                        <span>¥15,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Otaru (小樽)</h2>
+                <p class="destination-location">Hokkaido Prefecture, Hokkaido Region</p>
+                <p>Charming port city known for its picturesque canal, historic warehouses, glassworks, and exceptional
+                    seafood restaurants.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Otaru Canal: Free</span>
+                    <span class="price-tag">Kitaichi Glass Factory: Free</span>
+                    <span class="price-tag">Otaru Music Box Museum: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Grand Park Otaru</span>
+                        <span>¥20,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Authent Hotel Otaru</span>
+                        <span>¥16,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Sonia Otaru</span>
+                        <span>¥12,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <!-- Additional Tohoku cities -->
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Aomori (青森)</h2>
+                <p class="destination-location">Aomori Prefecture, Tohoku Region</p>
+                <p>Northern city famous for its spectacular Nebuta Festival, apple production, and contemporary art
+                    museum surrounded by natural beauty.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Nebuta Museum Wa Rasse: ¥600 (~$4)</span>
+                    <span class="price-tag">Aomori Museum of Art: ¥510 (~$3.40)</span>
+                    <span class="price-tag">Seiryu Temple: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hotel JAL City Aomori</span>
+                        <span>¥14,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Richmond Hotel Aomori</span>
+                        <span>¥11,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Daiwa Roynet Hotel Aomori</span>
+                        <span>¥9,500/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Yamagata (山形)</h2>
+                <p class="destination-location">Yamagata Prefecture, Tohoku Region</p>
+                <p>City surrounded by mountains, known for natural hot springs, "snow monsters" on Mt. Zao in winter,
+                    and rural temples.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Mt. Zao Ropeway: ¥3,000 (~$20)</span>
+                    <span class="price-tag">Yamadera Temple: ¥300 (~$2)</span>
+                    <span class="price-tag">Kajo Park: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Zao Kokusai Hotel</span>
+                        <span>¥24,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Kaminoyama Onsen Tsukioka Hotel</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Metropolitan Yamagata</span>
+                        <span>¥12,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <!-- Additional Chubu cities -->
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Takayama (高山)</h2>
+                <p class="destination-location">Gifu Prefecture, Chubu Region</p>
+                <p>Historic mountain city with beautifully preserved old town, traditional crafts, and renowned seasonal
+                    festivals.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Takayama Jinya: ¥440 (~$3)</span>
+                    <span class="price-tag">Hida Folk Village: ¥700 (~$4.70)</span>
+                    <span class="price-tag">Morning Markets: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Honjin Hiranoya Kachoan</span>
+                        <span>¥35,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Best Western Hotel Takayama</span>
+                        <span>¥15,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Wat Hotel &amp; Spa Hida Takayama</span>
+                        <span>¥12,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Matsumoto (松本)</h2>
+                <p class="destination-location">Nagano Prefecture, Chubu Region</p>
+                <p>Castle town surrounded by the Japanese Alps, featuring one of Japan's best-preserved original castles
+                    and vibrant arts scene.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Matsumoto Castle: ¥700 (~$4.70)</span>
+                    <span class="price-tag">Matsumoto City Museum of Art: ¥410 (~$2.70)</span>
+                    <span class="price-tag">Nakamachi Street: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hotel Buena Vista</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Richmond Hotel Matsumoto</span>
+                        <span>¥14,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Dormy Inn Matsumoto</span>
+                        <span>¥10,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <!-- Additional Chugoku cities -->
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Okayama (岡山)</h2>
+                <p class="destination-location">Okayama Prefecture, Chugoku Region</p>
+                <p>City famous for one of Japan's three great gardens, Korakuen, and its black-walled castle, as well as
+                    nearby historic Kurashiki.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Korakuen Garden: ¥400 (~$2.70)</span>
+                    <span class="price-tag">Okayama Castle: ¥300 (~$2)</span>
+                    <span class="price-tag">Kurashiki Bikan Historical Quarter: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Okayama Royal Hotel</span>
+                        <span>¥16,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>ANA Crowne Plaza Okayama</span>
+                        <span>¥14,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Mitsui Garden Hotel Okayama</span>
+                        <span>¥11,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Matsue (松江)</h2>
+                <p class="destination-location">Shimane Prefecture, Chugoku Region</p>
+                <p>Castle town known as the "City of Water," featuring one of Japan's few remaining original castles and
+                    connections to writer Lafcadio Hearn.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Matsue Castle: ¥670 (~$4.50)</span>
+                    <span class="price-tag">Lafcadio Hearn Memorial Museum: ¥300 (~$2)</span>
+                    <span class="price-tag">Horikawa Sightseeing Boat: ¥1,500 (~$10)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Ichibata Hotel</span>
+                        <span>¥15,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Matsue Excel Hotel Tokyu</span>
+                        <span>¥12,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Matsue Urban Hotel</span>
+                        <span>¥8,500/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <!-- Additional Kyushu cities -->
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Nagasaki (長崎)</h2>
+                <p class="destination-location">Nagasaki Prefecture, Kyushu Region</p>
+                <p>Historic port city with unique multicultural heritage, atomic bombing history, and beautiful night
+                    views from Mt. Inasa.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Atomic Bomb Museum: ¥200 (~$1.35)</span>
+                    <span class="price-tag">Glover Garden: ¥610 (~$4.10)</span>
+                    <span class="price-tag">Mt. Inasa Ropeway: ¥1,250 (~$8.40)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hotel New Nagasaki</span>
+                        <span>¥17,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>ANA Crowne Plaza Nagasaki Gloverhill</span>
+                        <span>¥21,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Dormy Inn Nagasaki</span>
+                        <span>¥10,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Kumamoto (熊本)</h2>
+                <p class="destination-location">Kumamoto Prefecture, Kyushu Region</p>
+                <p>Home to one of Japan's most important castles, vibrant cityscape, and gateway to the active volcano
+                    Mt. Aso.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Kumamoto Castle: ¥800 (~$5.40)</span>
+                    <span class="price-tag">Suizenji Garden: ¥400 (~$2.70)</span>
+                    <span class="price-tag">Mt. Aso: ¥1,000 (~$6.70)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Hotel Nikko Kumamoto</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Dormy Inn Kumamoto</span>
+                        <span>¥12,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Kumamoto Hotel Castle</span>
+                        <span>¥14,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <!-- Additional Okinawa cities -->
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Ishigaki (石垣)</h2>
+                <p class="destination-location">Okinawa Prefecture, Okinawa Region</p>
+                <p>Tropical island paradise in southern Okinawa known for pristine beaches, clear blue waters, coral
+                    reefs, and laid-back atmosphere.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Kabira Bay Glass Bottom Boat: ¥1,200 (~$8)</span>
+                    <span class="price-tag">Taketomi Island Ferry: ¥1,330 (~$9)</span>
+                    <span class="price-tag">Ishigaki Public Market: Free</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>ANA InterContinental Ishigaki Resort</span>
+                        <span>¥38,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Club Med Kabira Ishigaki</span>
+                        <span>¥45,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Fusaki Beach Resort Hotel &amp; Villas</span>
+                        <span>¥27,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+
+        <div class="destination-card">
+            <div class="destination-info">
+                <h2 class="destination-name">Miyakojima (宮古島)</h2>
+                <p class="destination-location">Okinawa Prefecture, Okinawa Region</p>
+                <p>Island city known for having some of Japan's most beautiful beaches, crystal clear waters for
+                    snorkeling, and scenic coastal drives.</p>
+
+                <div class="price-section">
+                    <p class="section-title">Popular Attractions:</p>
+                    <span class="price-tag">Yonaha Maehama Beach: Free</span>
+                    <span class="price-tag">Irabu Bridge: Free</span>
+                    <span class="price-tag">Snorkeling Tour: ¥8,000 (~$53)</span>
+                </div>
+
+                <div class="hotel-section">
+                    <p class="section-title">Recommended Hotels:</p>
+                    <div class="hotel-item">
+                        <span>Shigira Bayside Suite Allamanda</span>
+                        <span>¥40,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Hotel Locus</span>
+                        <span>¥18,000/night</span>
+                    </div>
+                    <div class="hotel-item">
+                        <span>Miyako Island Tokyu Hotel &amp; Resorts</span>
+                        <span>¥28,000/night</span>
+                    </div>
+                </div>
+
+                <button type="button" class="book-btn">Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add scroll animation for the sakura leaves
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            window.addEventListener('scroll', function () {
+                const leaves = document.querySelectorAll('.leaf');
+                leaves.forEach(leaf => {
+                    let speed = 0.5;
+                    leaf.style.transform = `translateY(${window.scrollY * speed}px)`;
+                });
+            });
+        }
+
+        let activeDialog = null;
+        const dialogTriggers = new WeakMap();
+        const focusableSelector = [
+            'a[href]',
+            'button:not([disabled])',
+            'input:not([disabled]):not([type="hidden"])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
+            '[tabindex]:not([tabindex="-1"])'
+        ].join(',');
+
+        function setOutsideDialogInert(dialog, shouldBeInert) {
+            if (shouldBeInert) {
+                let current = dialog;
+                while (current && current !== document.body) {
+                    const parent = current.parentElement;
+                    Array.from(parent.children).forEach(sibling => {
+                        if (sibling === current || sibling.hasAttribute('inert')) return;
+                        sibling.setAttribute('inert', '');
+                        sibling.dataset.dialogInert = 'true';
+                    });
+                    current = parent;
+                }
+                return;
+            }
+
+            document.querySelectorAll('[data-dialog-inert="true"]').forEach(element => {
+                element.removeAttribute('inert');
+                delete element.dataset.dialogInert;
+            });
+        }
+
+        function openAccessibleDialog(dialog, trigger, initialFocus) {
+            if (!dialog) return;
+            dialogTriggers.set(dialog, trigger || document.activeElement);
+            dialog.removeAttribute('inert');
+            setOutsideDialogInert(dialog, true);
+            activeDialog = dialog;
+            requestAnimationFrame(() => (initialFocus || dialog).focus());
+        }
+
+        function closeAccessibleDialog(dialog) {
+            if (!dialog) return;
+            const trigger = dialogTriggers.get(dialog);
+            dialog.setAttribute('inert', '');
+            setOutsideDialogInert(dialog, false);
+            if (activeDialog === dialog) activeDialog = null;
+            if (trigger && document.contains(trigger)) trigger.focus();
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key !== 'Tab' || !activeDialog) return;
+            const focusable = Array.from(activeDialog.querySelectorAll(focusableSelector)).filter(element =>
+                !element.closest('[inert]') && (element.offsetWidth || element.offsetHeight || element.getClientRects().length)
+            );
+            if (!focusable.length) {
+                event.preventDefault();
+                activeDialog.focus();
+                return;
+            }
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            }
+        });
+
+        // Improved Filter buttons functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const regionButtons = document.querySelectorAll('.filter-btn[data-region]');
+        const sortButtons = document.querySelectorAll('.filter-btn[data-sort]');
+        const destinationCards = document.querySelectorAll('.destination-card');
+        const destinationContainer = document.querySelector('.destinations-container');
+        const originalCardOrder = Array.from(destinationCards);
+
+        // Region mapping for better filtering - updated with proper prefectures
+        const regionMapping = {
+            // Kanto Region
+            'Tokyo (東京)': 'Kanto Region',
+            'Yokohama (横浜)': 'Kanto Region',
+            'Kamakura (鎌倉)': 'Kanto Region',
+            'Nikko (日光)': 'Kanto Region',
+            'Hakone (箱根)': 'Kanto Region',
+
+            // Kansai Region
+            'Kyoto (京都)': 'Kansai Region',
+            'Osaka (大阪)': 'Kansai Region',
+            'Nara (奈良)': 'Kansai Region',
+            'Kobe (神戸)': 'Kansai Region',
+
+            // Hokkaido Region
+            'Sapporo (札幌)': 'Hokkaido',
+            'Hakodate (函館)': 'Hokkaido',
+            'Otaru (小樽)': 'Hokkaido',
+
+            // Tohoku Region
+            'Sendai (仙台)': 'Tohoku Region',
+            'Aomori (青森)': 'Tohoku Region',
+            'Yamagata (山形)': 'Tohoku Region',
+
+            // Chubu Region
+            'Nagoya (名古屋)': 'Chubu Region',
+            'Kanazawa (金沢)': 'Chubu Region',
+            'Takayama (高山)': 'Chubu Region',
+            'Matsumoto (松本)': 'Chubu Region',
+
+            // Chugoku Region
+            'Hiroshima (広島)': 'Chugoku Region',
+            'Okayama (岡山)': 'Chugoku Region',
+            'Matsue (松江)': 'Chugoku Region',
+
+            // Kyushu Region
+            'Fukuoka (福岡)': 'Kyushu Region',
+            'Nagasaki (長崎)': 'Kyushu Region',
+            'Kumamoto (熊本)': 'Kyushu Region',
+
+            // Okinawa Region
+            'Naha (那覇)': 'Okinawa',
+            'Ishigaki (石垣)': 'Okinawa',
+            'Miyakojima (宮古島)': 'Okinawa'
+        };
+
+        // Function to get average hotel price for a card
+        function getAverageHotelPrice(card) {
+            const hotelPriceElements = card.querySelectorAll('.hotel-section .hotel-item span:last-child');
+            const prices = Array.from(hotelPriceElements).map(span => {
+                const priceText = span.textContent.trim();
+                // Remove yen symbol, commas, and anything after the numbers
+                const priceValue = priceText.replace(/[^0-9]/g, '');
+                return parseInt(priceValue, 10);
+            });
+
+            // Handle case where no prices are found
+            if (prices.length === 0) return 0;
+
+            const sum = prices.reduce((total, price) => total + price, 0);
+            return Math.round(sum / prices.length); // Round to nearest integer
+        }
+
+        // Function to get city name from card
+        function getCityName(card) {
+            return card.querySelector('.destination-name').textContent.trim();
+        }
+
+        // Track current filter and sort state
+        let currentRegionFilter = 'All Cities';
+        let currentSortOrder = null; // null, 'asc', or 'desc'
+
+        // Function to apply both filtering and sorting (+ text search)
+        function applyFilterAndSort() {
+            const cardsArray = [...originalCardOrder];
+            const searchInput = document.getElementById('city-search-input');
+            const searchTerm = searchInput ? searchInput.value.trim().toLowerCase() : '';
+
+            if (currentSortOrder !== null) {
+                cardsArray.sort((a, b) => {
+                    const priceA = getAverageHotelPrice(a);
+                    const priceB = getAverageHotelPrice(b);
+                    return currentSortOrder === 'asc' ? priceA - priceB : priceB - priceA;
+                });
+            }
+
+            cardsArray.forEach(card => destinationContainer.appendChild(card));
+
+            // Apply region and text filters after establishing the requested order.
+            cardsArray.forEach(card => {
+                const cityName = getCityName(card);
+                const location = card.querySelector('.destination-location').textContent;
+                const plainCity = cityName.toLowerCase();
+                const plainLocation = location.toLowerCase();
+
+                let passesRegion =
+                    currentRegionFilter === 'All Cities' ||
+                    location.includes(currentRegionFilter) ||
+                    (regionMapping[cityName] && regionMapping[cityName] === currentRegionFilter);
+
+                let passesSearch =
+                    !searchTerm ||
+                    plainCity.includes(searchTerm) ||
+                    plainLocation.includes(searchTerm);
+
+                card.style.display = (passesRegion && passesSearch) ? 'flex' : 'none';
+            });
+
+            regionButtons.forEach(button => {
+                const isActive = button.dataset.region === currentRegionFilter;
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-pressed', String(isActive));
+            });
+            sortButtons.forEach(button => {
+                const selectedSort = currentSortOrder || 'none';
+                const isActive = button.dataset.sort === selectedSort;
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-pressed', String(isActive));
+                if (button.dataset.sort !== 'none') {
+                    button.title = currentSortOrder === button.dataset.sort
+                        ? 'Sorting by average hotel price'
+                        : 'Sort destinations by average hotel price';
+                }
+            });
+        }
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                if (this.dataset.region) currentRegionFilter = this.dataset.region;
+                if (this.dataset.sort) currentSortOrder = this.dataset.sort === 'none' ? null : this.dataset.sort;
+
+                // Apply both filter and sort
+                applyFilterAndSort();
+            });
+        });
+
+        // City name search listener
+        const citySearchInput = document.getElementById('city-search-input');
+        if (citySearchInput) {
+            citySearchInput.addEventListener('input', function () {
+                // Whenever search changes, re-apply region + search + sort
+                applyFilterAndSort();
+            });
+        }
+
+        // Booking dialog shell. This personal project intentionally does not process payments.
+        const modalHtml = `
+            <div id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title" inert style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center;">
+                <div id="booking-modal-content" style="background:#232323; color:#f0f0f0; border-radius:10px; max-width:350px; margin:auto; padding:32px 24px 24px 24px; position:relative; box-shadow:0 8px 32px #000;">
+                    <button type="button" id="booking-modal-close" aria-label="Close booking dialog" style="position:absolute; top:10px; right:14px; background:none; border:none; color:#FFB7C5; font-size:22px; cursor:pointer; width:30px; height:30px; display:flex; align-items:center; justify-content:center;">&times;</button>
+                    <div id="booking-modal-body">
+                        <h2 id="booking-modal-title" style="color:#FFB7C5; margin-top:0; padding-right:30px;">Demo Booking</h2>
+                    </div>
+                </div>
+            </div>
+        `;
+        // Insert modal into body
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+        // Modal logic
+        const modal = document.getElementById('booking-modal');
+        const modalBody = document.getElementById('booking-modal-body');
+        const modalClose = document.getElementById('booking-modal-close');
+        let currentBooking = null;
+        let lastBookingTrigger = null;
+
+        function closeBookingModal() {
+            closeAccessibleDialog(modal);
+            modal.style.display = 'none';
+        }
+
+        modalClose.onclick = closeBookingModal;
+        modal.onclick = function (e) {
+            if (e.target === modal) closeBookingModal();
+        };
+
+        // About dialog uses self-contained static markup.
+        document.addEventListener('DOMContentLoaded', function () {
+            const aboutLink = document.getElementById('about-link');
+            const aboutToggle = document.getElementById('about-toggle');
+            const aboutOverlay = document.querySelector('.about-overlay');
+            const closeBtn = document.getElementById('about-close');
+            let lastAboutTrigger = null;
+
+            function closeAboutDialog() {
+                aboutToggle.checked = false;
+                closeAccessibleDialog(aboutOverlay);
+            }
+
+            aboutLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                lastAboutTrigger = e.currentTarget;
+                aboutToggle.checked = true;
+                openAccessibleDialog(aboutOverlay, lastAboutTrigger, closeBtn);
+            });
+            closeBtn.addEventListener('click', closeAboutDialog);
+            aboutOverlay.addEventListener('click', function (e) {
+                if (e.target === aboutOverlay) closeAboutDialog();
+            });
+        });
+
+        // Track authentication state
+        let isSignUpMode = true;
+
+        // This is a frontend-only demo account system. It does not provide real authentication.
+        function isSignedIn() {
+            return !!sessionStorage.getItem('signedInUser');
+        }
+
+        function createSalt() {
+            const bytes = new Uint8Array(16);
+            crypto.getRandomValues(bytes);
+            return Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function hashPassword(password, salt) {
+            const data = new TextEncoder().encode(`${salt}:${password}`);
+            const digest = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        // Switch between Sign Up and Sign In modes
+        function switchAuthMode() {
+            isSignUpMode = !isSignUpMode;
+            const title = document.getElementById('auth-title');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const switchBtn = document.getElementById('switch-mode-btn');
+            const passwordField = document.getElementById('authPassword');
+            const confirmPasswordField = document.getElementById('authConfirmPassword');
+
+            if (isSignUpMode) {
+                title.textContent = 'Sign Up';
+                submitBtn.textContent = 'Sign Up';
+                switchBtn.textContent = 'Already have an account? Sign In';
+                passwordField.autocomplete = 'new-password';
+                confirmPasswordField.style.display = 'block';
+                confirmPasswordField.required = true;
+            } else {
+                title.textContent = 'Sign In';
+                submitBtn.textContent = 'Sign In';
+                switchBtn.textContent = 'Need an account? Sign Up';
+                passwordField.autocomplete = 'current-password';
+                confirmPasswordField.style.display = 'none';
+                confirmPasswordField.required = false;
+            }
+            // Clear any messages
+            document.getElementById('authMessage').style.display = 'none';
+        }
+
+        // Handle authentication (Sign Up or Sign In)
+        async function handleAuth(event) {
+            event.preventDefault();
+            const email = document.getElementById('authEmail').value.trim();
+            const password = document.getElementById('authPassword').value;
+            const confirmPassword = document.getElementById('authConfirmPassword').value;
+            const messageDiv = document.getElementById('authMessage');
+
+            if (!isValidEmail(email)) {
+                showMessage('Please enter a valid email address', 'error');
+                return false;
+            }
+            if (password.length < 8) {
+                showMessage('Password must be at least 8 characters long', 'error');
+                return false;
+            }
+
+            const users = JSON.parse(localStorage.getItem('demoUsersV2') || '[]');
+            const existingUser = users.find(user => user.email === email);
+
+            if (isSignUpMode) {
+                // Sign Up Mode
+                if (password !== confirmPassword) {
+                    showMessage('Passwords do not match', 'error');
+                    return false;
+                }
+                if (existingUser) {
+                    showMessage('Email already exists. Please sign in instead.', 'error');
+                    // Auto-switch to sign in mode
+                    setTimeout(() => {
+                        switchAuthMode();
+                        document.getElementById('authEmail').value = email;
+                        document.getElementById('authPassword').value = '';
+                    }, 2000);
+                    return false;
+                }
+                const salt = createSalt();
+                const passwordHash = await hashPassword(password, salt);
+                users.push({ email, salt, passwordHash });
+                localStorage.setItem('demoUsersV2', JSON.stringify(users));
+                sessionStorage.setItem('signedInUser', email);
+                showMessage('Demo account created for this browser session.', 'success');
+            } else {
+                // Sign In Mode
+                if (!existingUser) {
+                    showMessage('Email not found. Please sign up first.', 'error');
+                    // Auto-switch to sign up mode
+                    setTimeout(() => {
+                        switchAuthMode();
+                        document.getElementById('authEmail').value = email;
+                        document.getElementById('authPassword').value = '';
+                    }, 2000);
+                    return false;
+                }
+                const passwordHash = await hashPassword(password, existingUser.salt);
+                if (existingUser.passwordHash !== passwordHash) {
+                    showMessage('Incorrect password. Please try again.', 'error');
+                    return false;
+                }
+                sessionStorage.setItem('signedInUser', email);
+                showMessage('Signed in to the frontend demo.', 'success');
+            }
+
+            document.getElementById('authForm').reset();
+            setTimeout(() => {
+                document.getElementById('signup-toggle').checked = false;
+                closeAccessibleDialog(document.querySelector('.signup-overlay'));
+                messageDiv.style.display = 'none';
+                updateAuthUI();
+            }, 1500);
+            return false;
+        }
+
+        // Sign out function
+        function handleSignOut() {
+            sessionStorage.removeItem('signedInUser');
+
+            // Reset the signup modal state
+            document.getElementById('signup-toggle').checked = false;
+
+            // Reset form to Sign Up mode
+            isSignUpMode = true;
+            const title = document.getElementById('auth-title');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const switchBtn = document.getElementById('switch-mode-btn');
+            const passwordField = document.getElementById('authPassword');
+            const confirmPasswordField = document.getElementById('authConfirmPassword');
+
+            title.textContent = 'Sign Up';
+            submitBtn.textContent = 'Sign Up';
+            switchBtn.textContent = 'Already have an account? Sign In';
+            passwordField.autocomplete = 'new-password';
+            confirmPasswordField.style.display = 'block';
+            confirmPasswordField.required = true;
+
+            // Clear form and messages
+            document.getElementById('authForm').reset();
+            document.getElementById('authMessage').style.display = 'none';
+
+            updateAuthUI();
+            showNotification('Successfully signed out!', 'success');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+
+            let backgroundColor;
+            switch (type) {
+                case 'warning':
+                    backgroundColor = 'rgba(255, 165, 0, 0.9)';
+                    break;
+                case 'error':
+                    backgroundColor = 'rgba(220, 20, 60, 0.9)';
+                    break;
+                case 'success':
+                default:
+                    backgroundColor = 'rgba(0, 128, 0, 0.9)';
+                    break;
+            }
+
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${backgroundColor};
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 0.5rem;
+                z-index: 10000;
+                animation: slideIn 0.3s ease-out;
+                max-width: 300px;
+                word-wrap: break-word;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('authMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = `message ${type}`;
+            messageDiv.style.display = 'block';
+        }
+
+        // Update authentication UI
+        function updateAuthUI() {
+            const authBtn = document.getElementById('auth-btn');
+            const signoutBtn = document.getElementById('signout-btn');
+            const signedInUser = sessionStorage.getItem('signedInUser');
+
+            if (signedInUser) {
+                authBtn.style.display = 'none';
+                signoutBtn.style.display = 'inline-block';
+                signoutBtn.textContent = `Sign out (${signedInUser.split('@')[0]})`;
+            } else {
+                // Ensure signup modal is closed and reset
+                document.getElementById('signup-toggle').checked = false;
+                document.querySelector('.signup-overlay').setAttribute('inert', '');
+
+                authBtn.style.display = 'inline-block';
+                authBtn.textContent = 'Sign up';
+                authBtn.classList.remove('signed-up');
+                authBtn.setAttribute('tabindex', '0');
+                authBtn.setAttribute('aria-disabled', 'false');
+                authBtn.style.pointerEvents = '';
+                signoutBtn.style.display = 'none';
+            }
+        }
+
+        function escapeHtml(value) {
+            return String(value).replace(/[&<>'"]/g, character => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            })[character]);
+        }
+
+        // Handle book now button clicks
+        function handleBooking(event) {
+            event.preventDefault();
+            lastBookingTrigger = event.currentTarget;
+
+            if (!isSignedIn()) {
+                showNotification('Please sign up or sign in to book a destination!', 'warning');
+                // Open the signup modal
+                document.getElementById('signup-toggle').checked = true;
+                openAccessibleDialog(document.querySelector('.signup-overlay'), lastBookingTrigger,
+                    document.getElementById('authEmail'));
+                return false;
+            }
+
+            // User is signed in, proceed with booking - show hotel selection modal
+            const card = event.target.closest('.destination-card');
+            const city = card.querySelector('.destination-name').textContent.trim();
+            const hotelSection = card.querySelector('.hotel-section');
+            const hotels = Array.from(hotelSection.querySelectorAll('.hotel-item')).map(item => {
+                const name = item.querySelector('span:first-child').textContent.trim();
+                const price = item.querySelector('span:last-child').textContent.trim();
+                return { name, price };
+            });
+
+            // Show hotel selection modal
+            const modalBody = document.getElementById('booking-modal-body');
+            let hotelOptions = '';
+            hotels.forEach((hotel, index) => {
+                hotelOptions += `
+                    <div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #444;">
+                        <label style="display:flex; align-items:center; cursor:pointer;">
+                            <input type="radio" name="hotel-selection" value="${index}" ${index === 0 ? 'checked' : ''} style="margin-right:10px;">
+                            <span>${escapeHtml(hotel.name)}</span>
+                        </label>
+                        <span>${escapeHtml(hotel.price)}</span>
+                    </div>
+                `;
+            });
+
+            modalBody.innerHTML = `
+                <h2 id="booking-modal-title" style="color:#FFB7C5; margin-top:0; padding-right:30px;">Select Hotel in ${escapeHtml(city)}</h2>
+                <div style="background:#232323; border-radius:8px; padding:15px; margin:15px 0;">
+                    ${hotelOptions}
+                </div>
+                <button type="button" id="confirm-hotel" style="background:rgba(255,183,197,0.15);color:#FFB7C5;border:1px solid rgba(255,183,197,0.4);padding:10px 20px;border-radius:4px;margin-top:10px;cursor:pointer;width:100%;">Review Demo Booking</button>
+            `;
+
+            // Show the hotel selection modal
+            const modal = document.getElementById('booking-modal');
+            modal.style.display = 'flex';
+            openAccessibleDialog(modal, lastBookingTrigger, document.getElementById('confirm-hotel'));
+
+            // Add event listener for hotel confirmation
+            document.getElementById('confirm-hotel').onclick = function () {
+                const selectedHotelIndex = document.querySelector('input[name="hotel-selection"]:checked').value;
+                const selectedHotel = hotels[selectedHotelIndex];
+
+                // Store selected hotel for receipt
+                currentBooking = {
+                    city,
+                    hotel: selectedHotel.name,
+                    price: selectedHotel.price
+                };
+
+                // Show an honest demo-only review. No card details are collected.
+                modalBody.innerHTML = `
+                    <h2 id="booking-modal-title" style="color:#FFB7C5; margin-top:0; padding-right:30px;">Demo Booking Review</h2>
+                    <p style="margin:12px 0; color:#ffd5de;">This personal project does not process payments or create real hotel reservations. No card details are collected.</p>
+                    <div style="background:#232323; border-radius:8px; padding:15px; margin:15px 0;">
+                        <p><strong>City:</strong> ${escapeHtml(city)}</p>
+                        <p><strong>Hotel:</strong> ${escapeHtml(selectedHotel.name)}</p>
+                        <p><strong>Displayed price:</strong> ${escapeHtml(selectedHotel.price)}</p>
+                    </div>
+                    <button type="button" id="confirm-demo-booking" style="background:rgba(255,183,197,0.15);color:#FFB7C5;border:1px solid rgba(255,183,197,0.4);padding:10px 20px;border-radius:4px;margin-top:20px;cursor:pointer;width:100%;">Create Demo Confirmation</button>
+                `;
+
+                const confirmDemoButton = document.getElementById('confirm-demo-booking');
+                confirmDemoButton.focus();
+                confirmDemoButton.onclick = function () {
+                    const signedInUser = sessionStorage.getItem('signedInUser');
+                    const bookingNum = "DEMO-JP" + Math.floor(Math.random() * 1000000).toString().padStart(6, "0");
+                    modalBody.innerHTML = `
+                        <div class="receipt" role="status" style="background:#232323; border-radius:8px; padding:24px; margin-top:10px; max-width:350px;">
+                            <h2 id="booking-modal-title" style="color:#FFB7C5; padding-right:30px;">Demo Confirmation Created</h2>
+                            <div style="color:#4caf50; font-weight:bold; margin-top:20px;">Preview created for ${escapeHtml(signedInUser.split('@')[0])}.</div>
+                            <p><strong>City:</strong> ${escapeHtml(currentBooking.city)}</p>
+                            <p><strong>Hotel:</strong> ${escapeHtml(currentBooking.hotel)}</p>
+                            <p><strong>Displayed price:</strong> ${escapeHtml(currentBooking.price)}</p>
+                            <p><strong>Demo reference:</strong> ${bookingNum}</p>
+                            <p style="margin-top:20px;">No payment was taken, no reservation was created, and no email will be sent.</p>
+                            <button type="button" id="booking-modal-done" style="background:rgba(255,183,197,0.15);color:#FFB7C5;border:1px solid rgba(255,183,197,0.4);padding:10px 20px;border-radius:4px;margin-top:20px;cursor:pointer;width:100%;">Done</button>
+                        </div>
+                    `;
+                    const doneButton = document.getElementById('booking-modal-done');
+                    doneButton.focus();
+                    doneButton.onclick = closeBookingModal;
+                };
+            };
+
+            return true;
+        }
+
+        // Initialize sign up functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            updateAuthUI();
+
+            const signupToggle = document.getElementById('signup-toggle');
+            const signupOverlay = document.querySelector('.signup-overlay');
+            const authBtn = document.getElementById('auth-btn');
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenuButton = document.getElementById('mobile-menu-btn');
+
+            authBtn.addEventListener('click', function () {
+                signupToggle.checked = true;
+                openAccessibleDialog(signupOverlay, authBtn, document.getElementById('authEmail'));
+            });
+            document.getElementById('auth-close').addEventListener('click', function () {
+                signupToggle.checked = false;
+                closeAccessibleDialog(signupOverlay);
+            });
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenuToggle.checked = !mobileMenuToggle.checked;
+                mobileMenuButton.setAttribute('aria-expanded', String(mobileMenuToggle.checked));
+                if (mobileMenuToggle.checked) {
+                    setTimeout(() => document.querySelector('.mobile-nav-item').focus(), 0);
+                }
+            });
+
+            signupToggle.addEventListener('change', function () {
+                if (signupToggle.checked) {
+                    openAccessibleDialog(signupOverlay, document.activeElement, document.getElementById('authEmail'));
+                } else {
+                    closeAccessibleDialog(signupOverlay);
+                }
+            });
+
+            // Add event listeners
+            document.getElementById('switch-mode-btn').addEventListener('click', switchAuthMode);
+            document.getElementById('signout-btn').addEventListener('click', handleSignOut);
+
+            // Add event listeners to all book buttons
+            const bookButtons = document.querySelectorAll('.book-btn');
+            bookButtons.forEach(function (button) {
+                button.addEventListener('click', function (event) {
+                    handleBooking(event);
+                });
+            });
+
+            // Mobile about link functionality
+            document.getElementById('mobile-about-link').addEventListener('click', function (e) {
+                e.preventDefault();
+                document.getElementById('mobile-menu-toggle').checked = false;
+                document.getElementById('mobile-menu-btn').setAttribute('aria-expanded', 'false');
+                document.getElementById('about-link').click();
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key !== 'Escape') return;
+                if (modal.style.display === 'flex') return closeBookingModal();
+                if (document.getElementById('about-toggle').checked) {
+                    return document.getElementById('about-close').click();
+                }
+                if (signupToggle.checked) {
+                    signupToggle.checked = false;
+                    return closeAccessibleDialog(signupOverlay);
+                }
+                document.getElementById('mobile-menu-toggle').checked = false;
+                document.getElementById('mobile-menu-btn').setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
+    <div class="progress" id="page-loader"
+        style="display:none; position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:99999;"></div>
+<script>
+    // Loader logic for navigation
+    function showLoader() {
+        var loader = document.getElementById('page-loader');
+        if (loader) loader.style.display = 'block';
+    }
+    function hideLoader() {
+        var loader = document.getElementById('page-loader');
+        if (loader) loader.style.display = 'none';
+    }
+    // Show loader on navigation links
+    document.addEventListener('DOMContentLoaded', function () {
+        var navLinks = document.querySelectorAll('nav a, .menu a, .logoBar a.logo');
+        navLinks.forEach(function (link) {
+            // Only for internal links
+            if (link.getAttribute('href') && !link.getAttribute('href').startsWith('http')) {
+                link.addEventListener('click', function (e) {
+                    // Don't show loader for About (handled by JS)
+                    if (link.id === 'about-link') return;
+                    showLoader();
+                    window.location = link.getAttribute('href');
+                    e.preventDefault();
+                });
+            }
+        });
+        // Hide loader on page load
+        hideLoader();
+    });
+</script>
+</body>
+</html>

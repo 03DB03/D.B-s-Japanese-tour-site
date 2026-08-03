@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover Japan's historic landmarks, temples, castles, natural wonders, and city icons.">
+    <title>Landmark - Discover Japan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #b22234;
+            --page-bg: #f8f9fa;
+            --text: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--page-bg);
+            color: var(--text);
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+        }
+
+        .hero-section {
+            align-items: center;
+            background-position: center;
+            background-size: cover;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            min-height: 100svh;
+            padding: 40px 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.4rem, 7vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .japanese-name {
+            color: var(--accent);
+            font-family: 'Sawarabi Mincho', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin: 0 auto 2rem;
+            max-width: 700px;
+        }
+
+        .btn {
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            border-radius: 30px;
+            color: #fff;
+            display: inline-block;
+            font-weight: 600;
+            margin: 10px;
+            padding: 12px 30px;
+            text-decoration: none;
+            transition: background-color .3s ease, color .3s ease, transform .3s ease, box-shadow .3s ease;
+        }
+
+        .btn:hover,
+        .btn:focus-visible {
+            background: transparent;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: #fff;
+        }
+
+        .btn-secondary:hover,
+        .btn-secondary:focus-visible {
+            background: #fff;
+            color: #333;
+        }
+
+        .stats-section,
+        .content-section {
+            padding: 80px 20px;
+        }
+
+        .stats-section {
+            background: #fff;
+        }
+
+        .content-section {
+            background: var(--page-bg);
+        }
+
+        .stats-container,
+        .content-container,
+        .footer-content {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .stats-container,
+        .info-grid,
+        .features-grid {
+            display: grid;
+            gap: 30px;
+        }
+
+        .stats-container {
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        }
+
+        .stat-card,
+        .info-card,
+        .feature-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .1);
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
+
+        .stat-card {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .stat-card:hover,
+        .info-card:hover,
+        .feature-card:hover {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .15);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            color: var(--accent);
+            font-size: clamp(1.65rem, 4vw, 2.5rem);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            color: #333;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-title span,
+        .info-card h3 {
+            color: var(--accent);
+        }
+
+        .info-grid {
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            margin-bottom: 60px;
+        }
+
+        .info-card {
+            padding: 30px;
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .info-card p + p {
+            margin-top: 1rem;
+        }
+
+        .features-grid {
+            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .feature-card {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .error-state {
+            align-items: center;
+            background: #232323;
+            color: #fff;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100svh;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .error-state h1 {
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .error-state p {
+            max-width: 620px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-section,
+            .content-section {
+                padding: 50px 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="landmark-page">
+        <header class="hero-section" id="hero">
+            <div class="hero-content">
+                <h1 id="landmark-title"></h1>
+                <div class="japanese-name" id="japanese-name" lang="ja"></div>
+                <p id="landmark-summary"></p>
+                <a href="destinations.html" class="btn btn-secondary">Explore More Destinations</a>
+            </div>
+        </header>
+
+        <main>
+            <section class="stats-section" aria-label="Landmark facts">
+                <div class="stats-container" id="stats"></div>
+            </section>
+
+            <section class="content-section">
+                <div class="content-container">
+                    <h2 class="section-title">Discover <span id="discover-name"></span></h2>
+                    <div class="info-grid" id="information"></div>
+                    <div class="features-grid" id="features"></div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <a href="index.html" class="btn">Back to Home</a>
+            </div>
+        </footer>
+    </div>
+
+    <section class="error-state" id="error-state" role="alert">
+        <h1>Landmark not found</h1>
+        <p>The requested landmark is unavailable or the link is incomplete.</p>
+        <a href="destinations.html" class="btn">Browse Destinations</a>
+    </section>
+
+    <script>
+        const landmarks = {"kanazawa":{"title":"Kanazawa Castle","japanese":"金沢城","summary":"A magnificent feudal castle that was once the seat of the powerful Maeda clan, offering a glimpse into Japan's samurai history.","discover":"Kanazawa Castle","image":"kanazawa-bg.jpg","accent":"#ff6b6b","stats":[{"value":"1580","label":"Original Construction"},{"value":"Maeda","label":"Clan Legacy"},{"value":"Kenroku-en","label":"Adjacent Garden"},{"value":"UNESCO","label":"Heritage Site"}],"info":[{"title":"Feudal History","paragraphs":["Originally built in 1580 by Sakuma Morimasa, Kanazawa Castle soon became the seat of the powerful Maeda clan, who ruled the Kaga Domain for 14 generations until the Meiji Restoration in 1868. The castle represents centuries of samurai culture and feudal Japanese history."]},{"title":"Architectural Marvel","paragraphs":["Over the centuries, the castle suffered multiple fires, with the most recent major fire in 1881 destroying many of its structures. Today, only a few original buildings remain, including the Ishikawa-mon Gate and the Sanjikken Nagaya storehouse. Since the 1990s, several turrets and gates have been reconstructed using traditional techniques."]},{"title":"Beautiful Gardens","paragraphs":["The castle is adjacent to the famous Kenrokuen Garden, which was once the castle's outer garden. This combination makes Kanazawa Castle one of Japan's most scenic castle sites, offering visitors the chance to explore both historic architecture and meticulously maintained traditional gardens."]}],"features":[{"icon":"🏯","title":"Castle Tours","description":"Explore the reconstructed areas and learn about feudal Japanese history."},{"icon":"🌸","title":"Garden Views","description":"Enjoy beautiful seasonal displays in the adjacent Kenrokuen Garden."},{"icon":"📸","title":"Photo Spots","description":"Capture stunning photos of the castle against seasonal backdrops."},{"icon":"🎨","title":"Cultural Experience","description":"Experience traditional Japanese culture and craftsmanship."}]},"arashiyama":{"title":"Arashiyama Bamboo Grove","japanese":"嵯峨野竹林","summary":"The Arashiyama Bamboo Grove is one of Kyoto's most iconic natural sites, located in the Arashiyama district on the western outskirts of the city. The bamboo forest features a scenic pathway that winds through soaring green stalks of bamboo, creating a unique and tranquil atmosphere.","discover":"Arashiyama","image":"arashiyama2.jpg","accent":"#228B22","stats":[{"value":"100+","label":"Bamboo Species"},{"value":"嵯峨野","label":"Location"},{"value":"四季","label":"All Seasons"},{"value":"国指定","label":"National Site"}],"info":[{"title":"Bamboo Experience","paragraphs":["Walking through the grove is an enchanting experience, with sunlight filtering through the dense bamboo to create a magical green glow. The gentle swaying and rustling of the bamboo have been recognized as one of Japan's \"100 Soundscapes\" by the Ministry of Environment.","The best time to visit is early morning or late afternoon when there are fewer visitors and the light is softer. The bamboo path connects the north gate of Tenryū-ji Temple with the Ōkōchi Sansō villa and garden, making it part of a popular sightseeing route in Arashiyama."]},{"title":"Surrounding Attractions","paragraphs":["The Arashiyama district is designated as both a Historic Site and a Place of Scenic Beauty. Beyond the bamboo grove, visitors can explore temples, shrines, the famous Togetsukyo Bridge over the Katsura River, and the Iwatayama Monkey Park, home to wild Japanese macaques.","The area is especially popular during cherry blossom season in spring and for autumn foliage. The nearby Tenryū-ji Temple, a UNESCO World Heritage Site, features beautiful gardens designed by the famous Zen master Musō Soseki."]}],"features":[{"icon":"🎋","title":"Natural Wonder","description":"Majestic bamboo forest creating a unique and tranquil atmosphere"},{"icon":"🏯","title":"Cultural Heritage","description":"Part of Historic Sites and Places of Scenic Beauty designation"},{"icon":"🌸","title":"Seasonal Beauty","description":"Beautiful year-round with different seasonal attractions"},{"icon":"📸","title":"Photo Spot","description":"Iconic location for photography with stunning natural features"}]},"fushimi":{"title":"Fushimi Inari Shrine","japanese":"伏見稲荷大社","summary":"Fushimi Inari Shrine (伏見稲荷大社, Fushimi Inari Taisha) is a major Shinto shrine in southern Kyoto, renowned for its thousands of vibrant vermilion torii gates that form scenic trails behind the main buildings.","discover":"Fushimi Inari","image":"fushimi2.jpg","accent":"#B22234","stats":[{"value":"∞","label":"Torii Gates"},{"value":"711","label":"Established"},{"value":"2.4km","label":"Trail Length"},{"value":"Free","label":"Admission"}],"info":[{"title":"Sacred Torii Gates","paragraphs":["The famous path of torii gates, called Senbon Torii (\"thousands of torii gates\"), winds through the wooded slopes of sacred Mount Inari. The full round-trip hike to the summit (about 233 meters above sea level) and back takes roughly 2-3 hours.","Each torii gate has been donated by individuals or businesses, with the donor's name and date inscribed on the back of each gate. The vibrant vermilion color is traditional for Shinto shrines and is believed to ward off evil spirits."]},{"title":"Shrine Complex","paragraphs":["The shrine complex includes numerous smaller shrines and many fox statues. Foxes (kitsune) are regarded as Inari's messengers, which is why you will see many fox statues throughout the shrine grounds.","Restaurants and shops are located near the base, offering local specialties such as inari sushi and kitsune udon. Fushimi Inari Shrine is one of Kyoto's most visited sites and is especially atmospheric in the early morning or evening when it is less crowded."]}],"features":[{"icon":"⛩️","title":"Sacred Site","description":"Dedicated to Inari, the Shinto deity of rice, agriculture, and prosperity"},{"icon":"🦊","title":"Kitsune Messengers","description":"Fox statues throughout the shrine grounds as messengers of Inari"},{"icon":"🥾","title":"Hiking Trails","description":"Scenic trails through torii gates offering peaceful walks in nature"},{"icon":"📸","title":"Photo Spot","description":"Iconic location for photography with stunning architectural features"}]},"himeji":{"title":"Himeji Castle","japanese":"姫路城","summary":"Himeji Castle is a Japanese castle in Himeji, Hyōgo Prefecture, regarded as the finest surviving example of prototypical Japanese castle architecture, comprising a network of 83 rooms with advanced defensive systems from the feudal period.","discover":"Himeji Castle","image":"himeji2.jpg","accent":"#B22234","stats":[{"value":"1333","label":"First Built"},{"value":"UNESCO","label":"World Heritage"},{"value":"83","label":"Rooms"},{"value":"White","label":"Heron Castle"}],"info":[{"title":"Architectural Marvel","paragraphs":["Himeji Castle is considered the finest surviving example of prototypical Japanese castle architecture. The castle's brilliant white facade has earned it the nickname \"White Heron Castle\" for its supposed resemblance to a bird taking flight.","The complex comprises 83 rooms with advanced defensive systems from the feudal period, including winding paths, trapdoors, and hidden floors. The castle complex includes several buildings, including the main donjon, smaller donjons, and various gates and walls."]},{"title":"Historical Significance","paragraphs":["Originally built in 1333, the castle was significantly expanded and rebuilt in the 17th century. It has survived wars, earthquakes, and the modernization of Japan, making it one of the few Japanese castles to retain its original form.","In 1993, Himeji Castle was registered as a UNESCO World Heritage Site as part of the \"Historic Monuments of Ancient Nara\" and \"Historic Monuments of Ancient Kyoto\" sites. It's considered one of Japan's most spectacular and well-preserved castles."]}],"features":[{"icon":"🏯","title":"UNESCO Site","description":"Recognized as a World Heritage Site for its architectural significance"},{"icon":"🛡️","title":"Defensive Design","description":"Advanced feudal-era defensive systems with trapdoors and hidden passages"},{"icon":"🌸","title":"Seasonal Beauty","description":"Surrounded by beautiful gardens with seasonal floral displays"},{"icon":"📸","title":"Photo Spot","description":"Iconic architecture perfect for photography and cultural appreciation"}]},"hiroshima":{"title":"Hiroshima Peace Memorial","japanese":"原爆ドーム","summary":"The Hiroshima Peace Memorial, also known as the Atomic Bomb Dome, is a UNESCO World Heritage Site that stands as a powerful symbol of peace and a reminder of the devastating effects of nuclear warfare.","discover":"Hiroshima Peace","image":"hiroshima2.jpg","accent":"#4d79ff","stats":[{"value":"1945","label":"Atomic Bomb"},{"value":"UNESCO","label":"World Heritage"},{"value":"1996","label":"Museum Opened"},{"value":"Peace","label":"Symbol"}],"info":[{"title":"Historical Significance","paragraphs":["The Hiroshima Peace Memorial, commonly known as the Atomic Bomb Dome, was one of the few structures left standing after the first atomic bomb detonated over Hiroshima on August 6, 1945. The bomb exploded almost directly above the building, which housed the Hiroshima Prefectural Industrial Promotion Hall at the time.","The ruins of the building were preserved as a reminder of the devastation caused by nuclear weapons and as a symbol of peace. In 1996, the Hiroshima Peace Memorial Museum was opened to educate visitors about the bombing and its aftermath."]},{"title":"Peace Memorial Park","paragraphs":["The Atomic Bomb Dome is located within the Hiroshima Peace Memorial Park, a 120,000-square-meter park dedicated to the victims of the bombing. The park contains several monuments and memorials, including the Peace Memorial Museum, the Children's Peace Monument, and the Memorial Cenotaph.","Every year on August 6th, the city holds a Peace Memorial Ceremony at the park, attended by survivors, government officials, and visitors from around the world. The ceremony includes the release of doves and a moment of silence at 8:15 AM, the exact time the bomb detonated."]}],"features":[{"icon":"🕊️","title":"Peace Symbol","description":"Iconic symbol of peace and nuclear disarmament worldwide"},{"icon":"🏛️","title":"UNESCO Site","description":"Recognized as a World Heritage Site for its historical significance"},{"icon":"📚","title":"Educational","description":"Peace Memorial Museum with exhibits on the bombing's impact"},{"icon":"🌸","title":"Park Setting","description":"Beautiful memorial park with seasonal floral displays"}]},"horyuji":{"title":"Horyu-ji Temple","japanese":"法隆寺","summary":"Horyu-ji Temple in Nara is one of the world's oldest wooden structures and a UNESCO World Heritage Site, renowned for its stunning Buddhist architecture and ancient treasures dating back over 1,300 years.","discover":"Horyu-ji","image":"hyoruji1.jpg","accent":"#4d79ff","stats":[{"value":"607","label":"Founded"},{"value":"UNESCO","label":"World Heritage"},{"value":"1,300+","label":"Years Old"},{"value":"Buddhist","label":"Treasures"}],"info":[{"title":"Ancient Architecture","paragraphs":["Horyu-ji Temple is considered the world's oldest wooden structure, with buildings dating back to the 7th century. The temple complex includes the Kondo (Golden Hall) and Goju-no-to (Five-Story Pagoda), both architectural masterpieces of early Buddhist design.","The temple's wooden structures have survived numerous fires, earthquakes, and the passage of time, thanks to traditional Japanese construction techniques that use interlocking wooden joints without nails. The buildings showcase the elegant simplicity and refined craftsmanship of Asuka period architecture."]},{"title":"Treasures & Significance","paragraphs":["The temple houses over 180 buildings and numerous national treasures, including ancient Buddhist statues, paintings, and artifacts. The temple's treasure house contains some of Japan's oldest and most significant Buddhist art, including the famous Shaka Triad statue.","In 1993, Horyu-ji was registered as a UNESCO World Heritage Site as part of the \"Historic Monuments of Ancient Nara\" collection. The temple remains an active religious site and continues to attract pilgrims and visitors from around the world."]}],"features":[{"icon":"🏯","title":"Oldest Wooden","description":"World's oldest surviving wooden structures from the 7th century"},{"icon":"🏛️","title":"UNESCO Site","description":"Recognized as a World Heritage Site for its historical significance"},{"icon":"🎨","title":"Ancient Art","description":"Treasure house with ancient Buddhist statues and paintings"},{"icon":"📸","title":"Photo Spot","description":"Beautiful temple grounds perfect for cultural photography"}]},"itsukushima":{"title":"Itsukushima Shrine","japanese":"厳島神社","summary":"Itsukushima Shrine on Miyajima Island is a UNESCO World Heritage Site famous for its \"floating\" torii gate that appears to float on the water during high tide, creating one of Japan's most iconic and photographed scenes.","discover":"Itsukushima","image":"itsukushima2.jpg","accent":"#228B22","stats":[{"value":"593","label":"Founded"},{"value":"UNESCO","label":"World Heritage"},{"value":"1168","label":"Torii Built"},{"value":"Miyajima","label":"Sacred Island"}],"info":[{"title":"Floating Torii Gate","paragraphs":["The iconic torii gate of Itsukushima Shrine is one of Japan's most recognizable landmarks. Built in 1168, the gate appears to float on the water during high tide, creating a stunning visual effect that has captivated visitors for centuries.","The gate stands 16 meters tall and was constructed to complement the shrine buildings, which themselves appear to float on the water during high tide. The effect is particularly dramatic during sunrise and sunset when the gate is illuminated against the sky."]},{"title":"Sacred Island","paragraphs":["Miyajima Island, where the shrine is located, has been considered a sacred place since ancient times. The island is home to over 600 wild deer that are considered messengers of the Shinto gods, and visitors can feed them throughout the island.","The shrine complex includes several buildings constructed over water, including the main hall, prayer hall, and stage for Noh performances. The entire island of Miyajima was designated as a UNESCO World Heritage Site in 1996 for its cultural significance."]}],"features":[{"icon":"⛩️","title":"Floating Gate","description":"Iconic torii gate that appears to float on water during high tide"},{"icon":"🦌","title":"Sacred Deer","description":"Over 600 wild deer considered messengers of the Shinto gods"},{"icon":"🏯","title":"UNESCO Site","description":"Recognized as a World Heritage Site for its cultural significance"},{"icon":"📸","title":"Photo Spot","description":"One of Japan's most photographed and iconic landmarks"}]},"kamakura":{"title":"Kamakura Great Buddha","japanese":"鎌倉大仏","summary":"The Great Buddha of Kamakura is a monumental bronze statue of Amida Buddha located at Kotoku-in Temple, standing 13.35 meters tall and weighing approximately 121 tons, making it the second tallest Buddha statue in Japan.","discover":"Kamakura Buddha","image":"kamakura2.jpg","accent":"#B22234","stats":[{"value":"1252","label":"Created"},{"value":"13.35m","label":"Height"},{"value":"121 tons","label":"Weight"},{"value":"Amida","label":"Buddha"}],"info":[{"title":"Historical Monument","paragraphs":["The Great Buddha of Kamakura was cast in 1252 and originally housed in a wooden temple hall. However, several natural disasters, including typhoons and earthquakes, destroyed the hall, leaving the statue permanently outdoors where it stands today.","The statue is considered one of Japan's most important cultural properties and represents the pinnacle of Kamakura period Buddhist art. Unlike the Great Buddha of Nara (Todai-ji), visitors can actually enter the interior of the Kamakura Buddha through a door at the back."]},{"title":"Kotoku-in Temple","paragraphs":["The Great Buddha is located at Kotoku-in Temple, a small Zen Buddhist temple in Kamakura. The temple grounds offer a peaceful setting for visitors to appreciate the statue and learn about its history through museum exhibits.","Kamakura was Japan's political capital during the Kamakura period (1185-1333), and the city remains rich in historical sites. The Great Buddha is just one of many attractions in this UNESCO World Heritage candidate site, along with temples, shrines, and traditional gardens."]}],"features":[{"icon":"🏯","title":"Bronze Statue","description":"Massive bronze statue of Amida Buddha, second tallest in Japan"},{"icon":"⛩️","title":"Historic Site","description":"Located in Kamakura, former political capital of Japan"},{"icon":"🎨","title":"Artistic Value","description":"Masterpiece of Kamakura period Buddhist sculpture"},{"icon":"📸","title":"Photo Spot","description":"Iconic landmark with stunning architectural details"}]},"kenrokuen":{"title":"Kenroku-en Garden","japanese":"兼六園","summary":"Kenroku-en Garden in Kanazawa is one of Japan's Three Great Gardens, featuring a perfect blend of six attributes: spaciousness, seclusion, artifice, antiquity, water sources, and magnificent views, creating a harmonious landscape that changes with the seasons.","discover":"Kenroku-en","image":"kenrokuen2.jpg","accent":"#228B22","stats":[{"value":"1676","label":"Established"},{"value":"3 Great","label":"Gardens of Japan"},{"value":"11.4ha","label":"Area"},{"value":"四季","label":"All Seasons"}],"info":[{"title":"Six Attributes Garden","paragraphs":["Kenroku-en Garden is designed according to the six attributes that define a perfect garden in Japanese aesthetics: spaciousness (kō), seclusion (roku), artifice (kyū), antiquity (chiku), water sources (sui), and magnificent views (dai). Each element is carefully balanced to create a harmonious landscape.","The garden features a central pond, winding paths, teahouses, stone bridges, and carefully pruned trees. The most famous feature is the massive pine tree wrapped in netting to protect it from heavy snow, creating an iconic silhouette against the winter sky."]},{"title":"Seasonal Beauty","paragraphs":["Kenroku-en offers distinct beauty throughout the year. Spring brings cherry blossoms and azaleas, summer features the evening illumination of the garden, autumn showcases vibrant maple leaves, and winter transforms the landscape into a snow-covered wonderland.","The garden is particularly famous for its winter illuminations and the \"snow viewing\" experience. The garden remains open year-round, with each season offering unique perspectives on the carefully crafted landscape design."]}],"features":[{"icon":"🌸","title":"Seasonal Displays","description":"Beautiful seasonal flora including cherry blossoms, maples, and plum blossoms"},{"icon":"🏯","title":"Historic Design","description":"One of Japan's Three Great Gardens with centuries-old landscape architecture"},{"icon":"🏮","title":"Winter Illumination","description":"Famous winter illuminations creating a magical snow-covered landscape"},{"icon":"📸","title":"Photo Spot","description":"Iconic landscapes perfect for photography and cultural appreciation"}]},"kinkakuji":{"title":"Kinkaku-ji Temple","japanese":"金閣寺","summary":"Kinkaku-ji Temple, also known as the Golden Pavilion, is one of Kyoto's most iconic landmarks featuring a magnificent three-story pavilion covered in gold leaf, set amidst beautiful gardens and reflecting in a mirror-like pond.","discover":"Kinkaku-ji","image":"kinkakuji2.jpg","accent":"#B22234","stats":[{"value":"1397","label":"Originally Built"},{"value":"1955","label":"Rebuilt"},{"value":"Gold","label":"Leaf Covered"},{"value":"UNESCO","label":"World Heritage"}],"info":[{"title":"Golden Pavilion","paragraphs":["Kinkaku-ji, officially named Rokuon-ji, is a Zen Buddhist temple whose top two floors are completely covered in gold leaf. The pavilion stands at 12.5 meters tall and reflects beautifully in the surrounding Kyōkō-chi pond, creating one of Japan's most photographed scenes.","The temple was originally built in 1397 as a retirement villa for Shogun Ashikaga Yoshimitsu, who later converted it into a Zen temple upon his death. The current structure is a reconstruction completed in 1955 after the original was burned down by a mentally ill monk in 1950."]},{"title":"Gardens & Design","paragraphs":["The temple is set within a beautiful Muromachi period garden designed to represent the Buddhist paradise. The garden features carefully arranged rocks, islands, and the reflective pond that perfectly mirrors the Golden Pavilion.","The site is part of the Historic Monuments of Ancient Kyoto UNESCO World Heritage Site. The temple and its gardens represent the pinnacle of Japanese garden design and are considered one of the most beautiful and serene spots in Kyoto, attracting millions of visitors each year."]}],"features":[{"icon":"🏯","title":"Golden Architecture","description":"Iconic three-story pavilion covered entirely in gold leaf"},{"icon":"⛩️","title":"UNESCO Site","description":"Part of Historic Monuments of Ancient Kyoto World Heritage Site"},{"icon":"🌸","title":"Seasonal Beauty","description":"Beautiful gardens with seasonal floral displays and reflections"},{"icon":"📸","title":"Photo Spot","description":"One of Japan's most photographed and iconic landmarks"}]},"kiyomizudera":{"title":"Kiyomizu-dera Temple","japanese":"清水寺","summary":"Kiyomizu-dera Temple in Kyoto is a UNESCO World Heritage Site famous for its wooden stage that offers panoramic views of Kyoto, its sacred waterfall, and its association with traditional Japanese culture and seasonal beauty.","discover":"Kiyomizu-dera","image":"kiyomizudera-bg.jpg","accent":"#4d79ff","stats":[{"value":"778","label":"Founded"},{"value":"UNESCO","label":"World Heritage"},{"value":"Wooden","label":"Stage"},{"value":"清水の舞台","label":"Pure Water Stage"}],"info":[{"title":"Wooden Stage & Views","paragraphs":["The temple's iconic wooden stage, built without using a single nail, extends 13 meters from the main hall and offers breathtaking panoramic views of Kyoto. The stage is particularly popular during cherry blossom season and autumn when the city is painted with seasonal colors.","The temple's name \"Kiyomizu\" means \"pure water,\" referring to the Otowa Waterfall within the temple grounds. Visitors can drink from three streams of the waterfall, each believed to grant a different wish: longevity, success in studies, or a fortunate love life."]},{"title":"Cultural Significance","paragraphs":["Kiyomizu-dera is part of the Historic Monuments of Ancient Kyoto UNESCO World Heritage Site. The temple has been rebuilt several times throughout history, with the current structures dating to 1633, but maintaining the original design.","The temple is especially popular during the spring and fall seasons, and is known for the saying \"jump off the stage at Kiyomizu\" (Kiyomizu no butai kara tobioriru), which refers to making a bold decision. The temple is also famous for its beautiful wooden architecture and traditional Japanese craftsmanship."]}],"features":[{"icon":"🏯","title":"UNESCO Site","description":"Recognized as a World Heritage Site for its historical significance"},{"icon":"⛩️","title":"Sacred Waterfall","description":"Otowa Waterfall with three streams for making wishes"},{"icon":"🌸","title":"Seasonal Beauty","description":"Stunning views of Kyoto with seasonal floral displays"},{"icon":"📸","title":"Photo Spot","description":"Iconic wooden stage perfect for panoramic photography"}]},"kofukuji":{"title":"Kofuku-ji Temple","japanese":"興福寺","summary":"Kofuku-ji Temple in Nara is one of Japan's oldest and most important Buddhist temples, featuring a spectacular five-story pagoda and housing one of Japan's most significant collections of Buddhist art and artifacts.","discover":"Kofuku-ji","image":"kofukuji2.jpg","accent":"#4d79ff","stats":[{"value":"669","label":"Founded"},{"value":"UNESCO","label":"World Heritage"},{"value":"5 Stories","label":"Pagoda Height"},{"value":"Buddhist","label":"Art Treasures"}],"info":[{"title":"Historic Temple Complex","paragraphs":["Kofuku-ji Temple is one of Japan's oldest and most significant Buddhist temples, founded in 669 CE. The temple complex includes several important structures, including the magnificent five-story pagoda that stands 50 meters tall and is one of Japan's tallest wooden structures.","The temple was originally built to pray for the recovery of the wife of Fujiwara no Kamatari, the founder of the powerful Fujiwara clan. Throughout its history, Kofuku-ji has been rebuilt multiple times due to fires and natural disasters, with the current pagoda dating to 1426."]},{"title":"Art & Treasures","paragraphs":["Kofuku-ji houses one of Japan's most important collections of Buddhist art and artifacts, including numerous National Treasures and Important Cultural Properties. The temple's museum contains statues, paintings, and religious objects that showcase the development of Japanese Buddhist art.","The temple is part of the \"Historic Monuments of Ancient Nara\" UNESCO World Heritage Site. The temple remains an active religious site and continues to play an important role in Japanese Buddhism, particularly as the head temple of the Hosso school."]}],"features":[{"icon":"🏯","title":"Ancient Temple","description":"One of Japan's oldest Buddhist temples with over 1,300 years of history"},{"icon":"⛩️","title":"UNESCO Site","description":"Part of Historic Monuments of Ancient Nara World Heritage Site"},{"icon":"🎨","title":"Buddhist Art","description":"Houses significant collection of Buddhist statues and artifacts"},{"icon":"📸","title":"Photo Spot","description":"Beautiful temple grounds perfect for cultural photography"}]},"koyasan":{"title":"Koya-san Temple","japanese":"高野山","summary":"Koya-san is a sacred mountain and temple complex in Wakayama Prefecture, founded in 816 by Kobo Daishi as the center of Shingon Buddhism, featuring over 100 temples and offering visitors a unique spiritual experience in a mountainous setting.","discover":"Koya-san","image":"koyasan2.jpg","accent":"#4d79ff","stats":[{"value":"816","label":"Founded"},{"value":"UNESCO","label":"World Heritage"},{"value":"100+","label":"Temples"},{"value":"Shingon","label":"Buddhism"}],"info":[{"title":"Sacred Mountain","paragraphs":["Koya-san is a sacred mountain and temple complex founded in 816 by the Buddhist monk Kobo Daishi (Kukai), who established it as the center of Shingon Esoteric Buddhism. The mountain has been a place of spiritual training for over 1,200 years.","The complex features over 100 temples, many of which offer visitors the opportunity to stay overnight and experience Buddhist hospitality. The temples range from grand architectural complexes to simple hermitages, all connected by peaceful walking paths through the forested mountain."]},{"title":"Spiritual Experience","paragraphs":["Visitors to Koya-san can participate in various Buddhist practices, including morning prayers, meditation sessions, and vegetarian temple cuisine (shojin ryori). The Okunoin Cemetery, Japan's largest cemetery, is a particularly significant site with over 200,000 graves.","The site is part of the \"Sacred Sites and Pilgrimage Routes in the Kii Mountain Range\" UNESCO World Heritage Site. The mountain's isolation and natural beauty create a unique atmosphere for spiritual reflection and cultural appreciation."]}],"features":[{"icon":"🏯","title":"Buddhist Center","description":"Center of Shingon Esoteric Buddhism with over 100 temples"},{"icon":"⛩️","title":"UNESCO Site","description":"Part of Sacred Sites and Pilgrimage Routes World Heritage Site"},{"icon":"🍽️","title":"Temple Cuisine","description":"Experience traditional vegetarian Buddhist temple meals"},{"icon":"📸","title":"Photo Spot","description":"Beautiful mountain setting perfect for spiritual photography"}]},"kumanokodo":{"title":"Kumano Kodo Pilgrimage","japanese":"熊野古道","summary":"The Kumano Kodo is a network of ancient pilgrimage routes in the Kii Mountain Range leading to the sacred Kumano Sanzan shrines, recognized as a UNESCO World Heritage Site for its spiritual significance and well-preserved historical pathways through pristine nature.","discover":"Kumano Kodo","image":"kumanokodo2.jpg","accent":"#228B22","stats":[{"value":"1000+","label":"Years Old"},{"value":"UNESCO","label":"World Heritage"},{"value":"Sacred","label":"Mountains"},{"value":"Pilgrimage","label":"Routes"}],"info":[{"title":"Ancient Pilgrimage Routes","paragraphs":["The Kumano Kodo is a network of ancient pilgrimage paths that have been used for over 1,000 years by pilgrims seeking spiritual enlightenment. The routes lead to the Three Grand Shrines of Kumano (Kumano Sanzan): Kumano Hongu Taisha, Kumano Hayatama Taisha, and Kumano Nachi Taisha.","The paths wind through pristine forests, mountain villages, and traditional settlements, offering pilgrims and hikers a unique combination of spiritual experience and natural beauty. The routes vary in difficulty from easy walks to challenging mountain trails, making them accessible to different levels of hikers."]},{"title":"Sacred Sites & Heritage","paragraphs":["The Kumano Kodo is part of the \"Sacred Sites and Pilgrimage Routes in the Kii Mountain Range\" UNESCO World Heritage Site, recognized for its cultural and spiritual significance. The area combines Shinto and Buddhist beliefs in a unique syncretic tradition.","Pilgrims traditionally walk the paths to visit the Kumano Sanzan shrines, believed to be where the gods descend to earth. The journey is considered a form of spiritual purification, and many visitors report profound experiences in the serene mountain environment."]}],"features":[{"icon":"🥾","title":"Hiking Trails","description":"Ancient pilgrimage routes through pristine mountain landscapes"},{"icon":"⛩️","title":"UNESCO Site","description":"Recognized for its spiritual and cultural significance"},{"icon":"🌲","title":"Natural Beauty","description":"Prinstine forests and mountain scenery along the pilgrimage routes"},{"icon":"📸","title":"Photo Spot","description":"Traditional villages and sacred sites perfect for cultural photography"}]},"matsumoto":{"title":"Matsumoto Castle","japanese":"松本城","summary":"Matsumoto Castle is one of Japan's most beautiful and best-preserved original castles, featuring a distinctive black exterior that has earned it the nickname \"Crow Castle\" and representing the finest example of Japanese feudal architecture in the country.","discover":"Matsumoto Castle","image":"matsumoto2.jpg","accent":"#B22234","stats":[{"value":"1590s","label":"Originally Built"},{"value":"UNESCO","label":"World Heritage"},{"value":"5 Stories","label":"Main Keep"},{"value":"Black","label":"Crow Castle"}],"info":[{"title":"Original Castle","paragraphs":["Matsumoto Castle is one of only twelve original castles remaining in Japan, with its main keep dating back to the 1590s. The castle's distinctive black exterior has earned it the nickname \"Crow Castle\" (Karasu-jō), making it one of Japan's most recognizable landmarks.","The castle complex includes several interconnected buildings, including the main keep, smaller keeps, and connecting corridors. The five-story main keep is built on a foundation of stone walls and features traditional Japanese defensive architecture with narrow windows for archers and hidden floors."]},{"title":"Historical Significance","paragraphs":["The castle was built by the Ishikawa clan and later controlled by the Matsudaira family, a branch of the Tokugawa clan. Unlike many Japanese castles that were destroyed during the Meiji Restoration, Matsumoto Castle was preserved thanks to local efforts and its continued use.","Today, the castle houses a museum with exhibits on its history, architecture, and the samurai culture of the region. The site is part of the \"Historic Villages of Shirakawa-go and Gokayama\" UNESCO World Heritage Site buffer zone, recognizing its cultural importance."]}],"features":[{"icon":"🏯","title":"Original Castle","description":"One of only 12 original castles remaining in Japan"},{"icon":"⛩️","title":"UNESCO Site","description":"Part of Historic Villages of Shirakawa-go buffer zone"},{"icon":"🎨","title":"Architecture","description":"Classic example of Japanese feudal castle design"},{"icon":"📸","title":"Photo Spot","description":"Iconic black castle perfect for historical photography"}]},"mtfuji":{"title":"Mount Fuji","japanese":"富士山","summary":"Mount Fuji is Japan's highest peak and most iconic landmark, standing at 3,776 meters and recognized as a UNESCO World Heritage Site for its cultural significance and breathtaking natural beauty that has inspired artists and pilgrims for centuries.","discover":"Mount Fuji","image":"mtfuji2.jpg","accent":"#228B22","stats":[{"value":"3,776m","label":"Height"},{"value":"UNESCO","label":"World Heritage"},{"value":"Active","label":"Volcano"},{"value":"Iconic","label":"Symbol"}],"info":[{"title":"Natural Wonder","paragraphs":["Mount Fuji is an active stratovolcano and Japan's highest peak at 3,776 meters. The mountain's perfectly symmetrical cone shape has made it one of the world's most recognizable landmarks and a source of national pride for Japan.","Located on Honshu island about 100 kilometers southwest of Tokyo, Mount Fuji is visible from the capital on clear days and has been a subject of art and literature for centuries. The mountain is considered sacred in both Shinto and Buddhist traditions and has been a pilgrimage site for over 1,000 years."]},{"title":"Cultural Significance","paragraphs":["Mount Fuji was designated as a UNESCO World Heritage Site in 2013 under the title \"Fujisan, sacred place and source of artistic inspiration.\" The mountain has inspired countless works of art, including the famous woodblock prints by Katsushika Hokusai.","The climbing season runs from early July to early September when trails are officially open. The mountain has several climbing routes of varying difficulty, and many visitors make the challenging ascent to watch the sunrise from the summit, considered a profound spiritual experience."]}],"features":[{"icon":"🏔️","title":"Highest Peak","description":"Japan's tallest mountain at 3,776 meters above sea level"},{"icon":"⛩️","title":"UNESCO Site","description":"Recognized for its cultural and spiritual significance"},{"icon":"🥾","title":"Climbing","description":"Popular hiking destination with multiple ascent routes"},{"icon":"📸","title":"Photo Spot","description":"Iconic landmark perfect for scenic and artistic photography"}]},"nachi":{"title":"Nachi Falls","japanese":"那智の滝","summary":"Nachi Falls is Japan's tallest waterfall at 133 meters, located in the sacred Nachi-Katsuura area of Wakayama Prefecture, where it flows from the Nachi River and is considered a sacred site in both Shinto and Buddhist traditions.","discover":"Nachi Falls","image":"nachi2.jpg","accent":"#228B22","stats":[{"value":"133m","label":"Height"},{"value":"UNESCO","label":"World Heritage"},{"value":"Sacred","label":"Waterfall"},{"value":"Nachi","label":"River"}],"info":[{"title":"Tallest Waterfall","paragraphs":["Nachi Falls is Japan's tallest waterfall at 133 meters, cascading down a sheer rock face in a single uninterrupted drop. The waterfall flows from the Nachi River and is particularly impressive during the rainy season when water volume is at its peak.","The falls are located within the sacred Nachi-Katsuura area, part of the \"Sacred Sites and Pilgrimage Routes in the Kii Mountain Range\" UNESCO World Heritage Site. The waterfall is considered sacred in both Shinto and Buddhist traditions and has been a site of pilgrimage for over 1,000 years."]},{"title":"Spiritual Significance","paragraphs":["The waterfall is considered one of Japan's three most sacred waterfalls and is associated with the Kumano faith. Visitors can view the falls from a platform that offers an impressive perspective of the water's power and beauty.","The area around Nachi Falls includes several important religious sites, including Seiganto-ji Temple at the base of the falls and Kumano Nachi Taisha Shrine at the top. The combination of natural beauty and spiritual significance makes this one of Japan's most unique and meaningful destinations."]}],"features":[{"icon":"💧","title":"Tallest Falls","description":"Japan's tallest waterfall at 133 meters high"},{"icon":"⛩️","title":"UNESCO Site","description":"Part of Sacred Sites and Pilgrimage Routes World Heritage Site"},{"icon":"🌲","title":"Natural Beauty","description":"Stunning waterfall in a pristine mountain setting"},{"icon":"📸","title":"Photo Spot","description":"Iconic waterfall perfect for nature photography"}]},"nagoyacastle":{"title":"Nagoya Castle","japanese":"名古屋城","summary":"Nagoya Castle is one of Japan's most important historical castles, originally built in 1612 and reconstructed in 1959, featuring golden dolphins (kinshachi) on its roof and serving as a symbol of the city with its impressive architecture and rich samurai heritage.","discover":"Nagoya Castle","image":"nagoya2.jpg","accent":"#B22234","stats":[{"value":"1612","label":"Originally Built"},{"value":"1959","label":"Reconstructed"},{"value":"Golden","label":"Dolphins"},{"value":"Samurai","label":"Heritage"}],"info":[{"title":"Historic Fortress","paragraphs":["Nagoya Castle was originally built in 1612 by Tokugawa Ieyasu, the founder of the Tokugawa shogunate, as a strategic fortress to protect the Tokugawa family's holdings in the region. The castle's most distinctive features are the golden dolphins (kinshachi) that adorn the main keep's roof.","The original castle was destroyed during World War II in 1945, and the current structure was reconstructed in 1959 using reinforced concrete. Plans are underway to rebuild the main keep using traditional materials and techniques, returning it to its original wooden construction."]},{"title":"Cultural Significance","paragraphs":["The castle serves as a symbol of Nagoya and is one of Japan's most important historical sites. The castle grounds include beautiful gardens, historical artifacts, and exhibits about the castle's history and the samurai culture of the region.","The Honmaru Palace, reconstructed in 1993, showcases traditional Japanese architecture and contains beautiful fusuma (sliding door) paintings. The castle is surrounded by moats and stone walls, creating a picturesque setting that reflects the grandeur of Japan's feudal era."]}],"features":[{"icon":"🏯","title":"Historic Castle","description":"Important historical fortress with golden dolphins on the roof"},{"icon":"⛩️","title":"Samurai Heritage","description":"Rich history connected to the Tokugawa shogunate"},{"icon":"🎨","title":"Architecture","description":"Beautiful traditional design with gardens and artifacts"},{"icon":"📸","title":"Photo Spot","description":"Iconic castle perfect for historical photography"}]},"nijo":{"title":"Nijo Castle","japanese":"二条城","summary":"Nijo Castle in Kyoto is a UNESCO World Heritage Site that served as the residence of the Tokugawa shoguns during their visits to the imperial capital, famous for its \"nightingale floors\" that chirp when walked upon and beautiful Ninomaru Garden.","discover":"Nijo Castle","image":"Nijo2.jpg","accent":"#B22234","stats":[{"value":"1603","label":"Originally Built"},{"value":"UNESCO","label":"World Heritage"},{"value":"Nightingale","label":"Floors"},{"value":"Tokugawa","label":"Shoguns"}],"info":[{"title":"Shogun Residence","paragraphs":["Nijo Castle was built in 1603 as the Kyoto residence of the Tokugawa shoguns, who ruled Japan for over 250 years. The castle served as a symbol of the shogun's power and authority in the imperial capital, where the emperor still resided.","The castle's most famous feature is the \"nightingale floors\" (uguisubari) in the Ninomaru Palace, which squeak when walked upon to alert residents of intruders. This ingenious security system demonstrates the sophisticated design of feudal Japanese architecture."]},{"title":"UNESCO Heritage","paragraphs":["Nijo Castle is part of the \"Historic Monuments of Ancient Kyoto\" UNESCO World Heritage Site. The castle complex includes the Ninomaru Palace with its beautiful fusuma (sliding door) paintings, the Honmaru Palace, and the expansive Ninomaru Garden.","The castle witnessed many important historical events, including the end of the Tokugawa shogunate in 1867 when the 15th shogun, Tokugawa Yoshinobu, announced his intention to return political power to the emperor, effectively ending the feudal era."]}],"features":[{"icon":"🏯","title":"UNESCO Site","description":"Part of Historic Monuments of Ancient Kyoto World Heritage Site"},{"icon":"⛩️","title":"Shogun History","description":"Former residence of the powerful Tokugawa shogun family"},{"icon":"🎨","title":"Architecture","description":"Beautiful traditional design with security features and gardens"},{"icon":"📸","title":"Photo Spot","description":"Historic castle perfect for cultural photography"}]},"nikko":{"title":"Nikko Toshogu Shrine","japanese":"日光東照宮","summary":"Nikko Toshogu Shrine is a lavishly decorated UNESCO World Heritage Site that serves as the mausoleum of Tokugawa Ieyasu, the founder of the Tokugawa shogunate, featuring intricate carvings, colorful buildings, and the famous \"see no evil, hear no evil, speak no evil\" monkey sculpture.","discover":"Nikko Toshogu","image":"nikko2.jpg","accent":"#B22234","stats":[{"value":"1617","label":"Originally Built"},{"value":"UNESCO","label":"World Heritage"},{"value":"5000+","label":"Carvings"},{"value":"Sacred","label":"Shrine"}],"info":[{"title":"Lavish Mausoleum","paragraphs":["Nikko Toshogu Shrine is the elaborate mausoleum of Tokugawa Ieyasu, who unified Japan and established the Tokugawa shogunate in 1603. The shrine complex is renowned for its extraordinary decorative elements, with over 500 carved and painted details covering every surface.","Built in 1617, the shrine is a masterpiece of Japanese craftsmanship, featuring intricate wood carvings, gold leaf decorations, and vibrant colors. The complex includes the main shrine building, sacred stable, and numerous smaller structures, all adorned with symbolic motifs and religious imagery."]},{"title":"Cultural Treasures","paragraphs":["The shrine is part of the \"Shrines and Temples of Nikko\" UNESCO World Heritage Site. The famous \"Three Wise Monkeys\" carving (representing \"see no evil, hear no evil, speak no evil\") is one of the most recognizable symbols of Japanese culture.","The shrine complex is set within beautiful natural surroundings in Nikko National Park, combining religious significance with scenic beauty. The site attracts millions of visitors annually who come to admire the architectural splendor and learn about Japan's feudal history."]}],"features":[{"icon":"🏯","title":"UNESCO Site","description":"Part of Shrines and Temples of Nikko World Heritage Site"},{"icon":"⛩️","title":"Shogun Mausoleum","description":"Elaborate shrine housing the remains of Tokugawa Ieyasu"},{"icon":"🎨","title":"Artistic Detail","description":"Over 5000 intricate carvings and decorative elements"},{"icon":"📸","title":"Photo Spot","description":"Iconic shrine perfect for cultural photography"}]},"nikkozanrinnoji":{"title":"Zanrin-no-in Temple","japanese":"輪王寺","summary":"Zanrin-no-in Temple is one of the three major temples in Nikko, forming part of the UNESCO World Heritage Site \"Shrines and Temples of Nikko,\" featuring beautiful architecture, sacred statues, and serving as the head temple of the Tendai sect in the Kanto region.","discover":"Zanrin-no-in","image":"rinnoji2.jpg","accent":"#4d79ff","stats":[{"value":"766","label":"Founded"},{"value":"UNESCO","label":"World Heritage"},{"value":"Tendai","label":"Buddhism"},{"value":"Sacred","label":"Temple"}],"info":[{"title":"Historic Temple","paragraphs":["Zanrin-no-in Temple, also known as Rinno-ji, is one of the three major temples in Nikko and part of the UNESCO World Heritage Site \"Shrines and Temples of Nikko.\" Founded in 766 by the Buddhist priest Shodo Shonin, the temple serves as the head temple of the Tendai sect in the Kanto region.","The temple complex includes several important structures, including the main hall ( Hondō ), the three-story pagoda, and the sacred stable. The temple is particularly famous for its beautiful autumn colors and the sacred statues housed within its halls."]},{"title":"UNESCO Heritage","paragraphs":["As part of the \"Shrines and Temples of Nikko\" UNESCO World Heritage Site, Zanrin-no-in Temple represents the unique fusion of Shinto and Buddhist architecture and religious practices that characterizes Japanese religious culture.","The temple houses important cultural properties, including Buddhist statues and paintings. The complex is set within beautiful natural surroundings, with well-maintained gardens that change with the seasons and provide a serene setting for contemplation and worship."]}],"features":[{"icon":"🏯","title":"UNESCO Site","description":"Part of Shrines and Temples of Nikko World Heritage Site"},{"icon":"⛩️","title":"Buddhist Temple","description":"Head temple of the Tendai sect in the Kanto region"},{"icon":"🎨","title":"Artistic Treasures","description":"Houses important Buddhist statues and cultural properties"},{"icon":"📸","title":"Photo Spot","description":"Beautiful temple grounds perfect for cultural photography"}]},"osaka":{"title":"Osaka Castle","japanese":"大阪城","summary":"Osaka Castle is one of Japan's most famous landmarks, originally built in 1583 by Toyotomi Hideyoshi and reconstructed several times, featuring a magnificent five-story keep that dominates the Osaka skyline and houses a museum about the castle's history and the samurai era.","discover":"Osaka Castle","image":"osaka2.jpg","accent":"#B22234","stats":[{"value":"1583","label":"Originally Built"},{"value":"1868","label":"Meiji Restoration"},{"value":"5 Stories","label":"Main Keep"},{"value":"Toyotomi","label":"Hideyoshi"}],"info":[{"title":"Feudal Fortress","paragraphs":["Osaka Castle was originally built in 1583 by Toyotomi Hideyoshi, one of Japan's most powerful feudal lords who unified the country. The castle served as the center of Hideyoshi's power and was one of the largest castles in Japan, with a complex of nearly 600 buildings.","The original castle was destroyed during the Siege of Osaka (1614-1615) by the Tokugawa forces. The current structure is the third reconstruction, completed in 1997, with the main keep housing a museum that showcases the castle's history and artifacts from the samurai era."]},{"title":"Cultural Significance","paragraphs":["Osaka Castle is surrounded by beautiful gardens that change with the seasons, particularly famous for cherry blossoms in spring. The castle grounds cover approximately 100,000 square meters and include several gates, turrets, and defensive structures.","The castle represents a pivotal point in Japanese history, marking the transition from the Sengoku period of warring states to the more stable Edo period under Tokugawa rule. Today, it serves as a symbol of Osaka and attracts millions of visitors annually."]}],"features":[{"icon":"🏯","title":"Historic Castle","description":"Iconic fortress built by Toyotomi Hideyoshi in 1583"},{"icon":"⛩️","title":"Samurai History","description":"Central to Japan's unification and feudal era"},{"icon":"🌸","title":"Seasonal Beauty","description":"Beautiful gardens with cherry blossoms and seasonal displays"},{"icon":"📸","title":"Photo Spot","description":"Magnificent castle perfect for historical photography"}]},"ritsurin":{"title":"Ritsurin Garden","japanese":"栗林公園","summary":"Ritsurin Garden in Takamatsu is one of Japan's most beautiful strolling gardens, designated as a Special Place of Scenic Beauty, featuring a harmonious blend of six ponds and thirteen hills that create a landscape painting come to life with seasonal flora and traditional teahouses.","discover":"Ritsurin Garden","image":"ritsurin2.jpeg","accent":"#228B22","stats":[{"value":"1642","label":"Originally Built"},{"value":"75ha","label":"Garden Area"},{"value":"6 Ponds","label":"13 Hills"},{"value":"Scenic","label":"Beauty"}],"info":[{"title":"Strolling Garden","paragraphs":["Ritsurin Garden is considered one of Japan's finest examples of a strolling garden (kaiyū-shiki teien), designed to be viewed while walking along its winding paths. The garden was developed over 100 years, from 1642 to 1745, by the Matsudaira family, the feudal lords of Takamatsu.","The garden's design incorporates six ponds and thirteen artificial hills that recreate scenes from Chinese poetry and Japanese literature. The landscape changes dramatically with the seasons, from cherry blossoms in spring to brilliant autumn colors, making it a year-round destination for visitors."]},{"title":"Cultural Treasures","paragraphs":["The garden is designated as a Special Place of Scenic Beauty, the highest level of protection for cultural properties in Japan. Within the garden grounds are several historic structures, including the Kikugetsutei teahouse and the ruins of the Ritsurin Palace.","Ritsurin Garden represents the pinnacle of Japanese garden design, combining elements of both Japanese and Chinese aesthetics. The garden has inspired countless artists and poets and continues to be a source of tranquility and beauty for visitors from around the world."]}],"features":[{"icon":"🏯","title":"Scenic Beauty","description":"Designated Special Place of Scenic Beauty by the Japanese government"},{"icon":"⛩️","title":"Garden Design","description":"Masterpiece of strolling garden architecture with 6 ponds and 13 hills"},{"icon":"🌸","title":"Seasonal Beauty","description":"Stunning seasonal displays including cherry blossoms and autumn colors"},{"icon":"📸","title":"Photo Spot","description":"Beautiful landscapes perfect for nature and cultural photography"}]},"sensoji":{"title":"Senso-ji Temple","japanese":"浅草寺","summary":"Senso-ji Temple in Asakusa, Tokyo is the city's oldest and most famous Buddhist temple, founded in 645 AD and dedicated to Kannon, the goddess of mercy, featuring the iconic Kaminarimon Gate and Nakamise Shopping Street leading to the main hall.","discover":"Senso-ji","image":"sensoji2.jpg","accent":"#4d79ff","stats":[{"value":"645","label":"Founded"},{"value":"Kannon","label":"Goddess of Mercy"},{"value":"Kaminarimon","label":"Thunder Gate"},{"value":"Asakusa","label":"District"}],"info":[{"title":"Oldest Temple in Tokyo","paragraphs":["Senso-ji Temple is Tokyo's oldest temple, founded in 645 AD according to legend. The temple is dedicated to Kannon, the Buddhist goddess of mercy, and is one of the city's most popular and accessible religious sites.","The approach to the temple through Nakamise Shopping Street is lined with traditional shops selling souvenirs, snacks, and crafts. The street has been a commercial area for over 900 years, making it one of Tokyo's oldest shopping districts."]},{"title":"Cultural Experience","paragraphs":["The temple complex includes several structures, with the iconic Kaminarimon (Thunder Gate) serving as the entrance. Visitors can participate in traditional Buddhist practices such as cleansing hands and mouth at the temizuya (water pavilion) and making offerings at the main hall.","Senso-ji hosts numerous festivals throughout the year, including the famous Sanja Matsuri in May, one of Tokyo's largest festivals. The temple represents the blend of traditional Japanese culture and modern urban life that defines Tokyo."]}],"features":[{"icon":"🏯","title":"Historic Temple","description":"Tokyo's oldest Buddhist temple founded in 645 AD"},{"icon":"⛩️","title":"Cultural Site","description":"Iconic Kaminarimon Gate and traditional shopping street"},{"icon":"🎨","title":"Traditional Practices","description":"Experience authentic Buddhist rituals and customs"},{"icon":"📸","title":"Photo Spot","description":"Famous landmark perfect for cultural photography"}]},"shibuya":{"title":"Shibuya Crossing","japanese":"渋谷スクランブル交差点","summary":"Experience the world's busiest pedestrian crossing, a symbol of modern Tokyo's energy and organized chaos where thousands of people cross from all directions simultaneously.","discover":"Shibuya","image":"shibuya2.jpeg","accent":"#ffd700","stats":[{"value":"3,000+","label":"Pedestrians per Crossing"},{"value":"1973","label":"Year Established"},{"value":"109","label":"Stories Tall"},{"value":"24/7","label":"Operational Hours"}],"info":[{"title":"Iconic Intersection","paragraphs":["Shibuya Crossing is renowned as the world's busiest pedestrian scramble crossing, where thousands of people cross from all directions simultaneously when the lights turn red. This mesmerizing spectacle of organized urban chaos has become an iconic symbol of modern Tokyo."]},{"title":"Hachiko Statue","paragraphs":["Just outside Shibuya Station stands the famous statue of Hachiko, the loyal Akita dog who waited for his deceased owner at the station every day for nearly 10 years. This touching story has made the statue a popular meeting spot and symbol of loyalty."]},{"title":"Shopping & Entertainment","paragraphs":["The area surrounding the crossing is a vibrant hub of shopping, dining, and entertainment. From flagship stores of international brands to quirky Japanese boutiques, from cozy cafes to lively izakayas, Shibuya offers something for every taste and budget."]}],"features":[{"icon":"🏙️","title":"City Views","description":"Enjoy panoramic views of the neon-lit skyline from the Starbucks overlooking the crossing."},{"icon":"📸","title":"Photo Opportunities","description":"Capture stunning photos of the famous scramble crossing from various vantage points."},{"icon":"🛍️","title":"Retail Therapy","description":"Explore flagship stores and unique boutiques in the surrounding shopping districts."},{"icon":"🍜","title":"Local Cuisine","description":"Taste authentic Japanese street food and international cuisine in the area."}]},"todaiji":{"title":"Todai-ji Temple","japanese":"東大寺","summary":"Home to the Great Buddha of Nara, this historic Buddhist temple is one of Japan's most significant religious sites and a UNESCO World Heritage Site.","discover":"Todai-ji","image":"todaiji2.jpeg","accent":"#4d79ff","stats":[{"value":"752","label":"Founded Year"},{"value":"15m","label":"Buddha Height"},{"value":"UNESCO","label":"World Heritage Site"},{"value":"Deer","label":"Sacred Messengers"}],"info":[{"title":"Great Buddha Hall","paragraphs":["The Daibutsuden (Great Buddha Hall) is the world's largest wooden building, housing one of Japan's largest bronze statues of Buddha (Daibutsu), standing at about 15 meters tall. Though the current structure is only about two-thirds the size of the original, it remains an architectural marvel."]},{"title":"Historical Significance","paragraphs":["Constructed in 752 CE as the head temple of all provincial Buddhist temples in Japan, Todai-ji was built to help establish Buddhism as the state religion and to protect the country from disaster. It served as the Japanese headquarters of the Kegon school of Buddhism."]},{"title":"Sacred Deer Park","paragraphs":["The temple complex is home to hundreds of wild deer considered sacred messengers of the gods. These friendly animals roam freely throughout Nara Park and are particularly active around Todai-ji, where visitors can purchase special crackers to feed them."]}],"features":[{"icon":"🏛️","title":"Architecture","description":"Marvel at the incredible wooden architecture of the Great Buddha Hall."},{"icon":"🦌","title":"Deer Interaction","description":"Feed and interact with the sacred deer roaming the temple grounds."},{"icon":"🙏","title":"Spiritual Experience","description":"Experience the peaceful atmosphere of this ancient Buddhist temple."},{"icon":"📸","title":"Photography","description":"Capture stunning photos of the Great Buddha and historic architecture."}]},"tokyot":{"title":"Tokyo Tower","japanese":"東京タワー","summary":"Tokyo Tower is a communications and observation tower located in the Shiba-koen district of Minato, Tokyo. At 333 meters tall, it was Japan's tallest structure until the Tokyo Skytree was completed in 2012, and remains the second tallest structure in Japan.","discover":"Tokyo Tower","image":"tokyot-bg.jpg","accent":"#ff6b6b","stats":[{"value":"333m","label":"Height"},{"value":"1958","label":"Completed"},{"value":"2 Observatories","label":"Viewing Decks"},{"value":"Iconic","label":"Landmark"}],"info":[{"title":"Architectural Marvel","paragraphs":["Tokyo Tower was inspired by the Eiffel Tower in Paris and was constructed using steel from disassembled military bridges after World War II. The tower's distinctive international orange and white color scheme was chosen for visibility against the sky and to comply with air safety regulations.","The tower serves multiple purposes, including telecommunications, tourism, and as a symbol of Japan's post-war recovery and economic growth. It has become an iconic landmark featured in countless films, anime, and photographs representing Tokyo."]},{"title":"Observation Decks","paragraphs":["Tokyo Tower features two main observation decks: the Main Deck at 150 meters and the Top Deck at 250 meters. Visitors can enjoy panoramic views of Tokyo, Mount Fuji on clear days, and the Tokyo metropolitan area stretching to the horizon.","The tower also houses several attractions including aquariums, wax museums, and shops. The Foot Town complex at the base of the tower offers additional entertainment options and is a popular destination for families and tourists."]}],"features":[{"icon":"🗼","title":"Iconic Landmark","description":"Symbol of Tokyo and Japan's post-war recovery"},{"icon":"👀","title":"Observation Decks","description":"Two viewing platforms with spectacular city views"},{"icon":"🛍️","title":"Shopping & Dining","description":"Foot Town complex with shops, restaurants, and attractions"},{"icon":"📸","title":"Photo Spot","description":"Iconic landmark perfect for photography"}]}};
+
+        const createElement = (tag, className, text) => {
+            const element = document.createElement(tag);
+            if (className) element.className = className;
+            if (text !== undefined) element.textContent = text;
+            return element;
+        };
+
+        const renderLandmark = (landmark) => {
+            document.title = `${landmark.title} - Discover Japan`;
+            document.documentElement.style.setProperty('--accent', landmark.accent);
+
+            const hero = document.getElementById('hero');
+            hero.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, .8), rgba(0, 0, 0, .9)), url("${landmark.image}")`;
+            document.getElementById('landmark-title').textContent = landmark.title;
+            document.getElementById('japanese-name').textContent = landmark.japanese;
+            document.getElementById('landmark-summary').textContent = landmark.summary;
+            document.getElementById('discover-name').textContent = landmark.discover || landmark.title;
+
+            const stats = document.getElementById('stats');
+            landmark.stats.forEach((stat) => {
+                const card = createElement('article', 'stat-card');
+                card.append(
+                    createElement('div', 'stat-number', stat.value),
+                    createElement('div', 'stat-label', stat.label)
+                );
+                stats.append(card);
+            });
+
+            const information = document.getElementById('information');
+            landmark.info.forEach((item) => {
+                const card = createElement('article', 'info-card');
+                card.append(createElement('h3', '', item.title));
+                item.paragraphs.forEach((paragraph) => {
+                    card.append(createElement('p', '', paragraph));
+                });
+                information.append(card);
+            });
+
+            const features = document.getElementById('features');
+            landmark.features.forEach((feature) => {
+                const card = createElement('article', 'feature-card');
+                const icon = createElement('div', 'feature-icon', feature.icon);
+                icon.setAttribute('aria-hidden', 'true');
+                card.append(
+                    icon,
+                    createElement('h3', '', feature.title),
+                    createElement('p', '', feature.description)
+                );
+                features.append(card);
+            });
+        };
+
+        const getRequestedId = () => {
+            const hashId = decodeURIComponent(window.location.hash.slice(1)).trim();
+            const queryId = new URLSearchParams(window.location.search).get('id');
+            return (hashId || queryId || '').toLowerCase().replace(/\.html$/, '');
+        };
+
+        const showRequestedLandmark = () => {
+            const selectedLandmark = landmarks[getRequestedId()];
+            const page = document.getElementById('landmark-page');
+            const errorState = document.getElementById('error-state');
+
+            if (!selectedLandmark) {
+                page.hidden = true;
+                errorState.style.display = 'flex';
+                return;
+            }
+
+            page.hidden = false;
+            errorState.style.display = 'none';
+            document.getElementById('stats').replaceChildren();
+            document.getElementById('information').replaceChildren();
+            document.getElementById('features').replaceChildren();
+            renderLandmark(selectedLandmark);
+        };
+
+        showRequestedLandmark();
+        window.addEventListener('hashchange', showRequestedLandmark);
+    </script>
+</body>
+</html>
